@@ -1,0 +1,244 @@
+version: 2
+
+sources:
+  - name: salesforce_marketing_cloud
+    database: '{% if target.type not in ("spark") %}{{ var("salesforce_marketing_cloud_database", target.database) }}{% endif %}'
+    schema: '{{ var("salesforce_marketing_cloud_schema", "salesforce_marketing_cloud") }}'
+    tables:
+      - name: email
+        identifier: '{{ var("salesforce_marketing_cloud_email_identifier", "email") }}'
+        description: '{{ doc("email") }}'
+        columns:
+          - name: id
+            description: '{{ doc("email_id") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: character_set
+            description: '{{ doc("character_set") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: name
+            description: '{{ doc("email_name") }}'
+          - name: pre_header
+            description: '{{ doc("pre_header") }}'
+          - name: subject
+            description: '{{ doc("subject") }}'
+          - name: text_body
+            description: '{{ doc("text_body") }}'
+          - name: asset_type_id
+            description: '{{ doc("asset_type_id") }}'
+          - name: asset_id
+            description: '{{ doc("asset_id") }}'
+
+      - name: event
+        identifier: '{{ var("salesforce_marketing_cloud_event_identifier", "event") }}'
+        description: '{{ doc("event") }}'
+        columns:
+          - name: event_type
+            description: '{{ doc("event_type") }}'
+          - name: id
+            description: '{{ doc("event_id") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: batch_id
+            description: '{{ doc("batch_id") }}'
+          - name: bounce_category
+            description: '{{ doc("bounce_category") }}'
+          - name: bounce_type
+            description: '{{ doc("bounce_type") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: event_date
+            description: '{{ doc("event_date") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: opt_in_subscriber_key
+            description: '{{ doc("opt_in_subscriber_key") }}'
+          - name: question
+            description: '{{ doc("question") }}'
+          - name: send_id
+            description: '{{ doc("send_id") }}'
+          - name: smtp_code
+            description: '{{ doc("smtp_code") }}'
+          - name: smtp_reason
+            description: '{{ doc("smtp_reason") }}'
+          - name: subscriber_key
+            description: '{{ doc("subscriber_key") }}'
+          - name: triggered_send_id
+            description: '{{ doc("triggered_send_id") }}'
+          - name: unsubscribed_list_id
+            description: '{{ doc("unsubscribed_list_id") }}'
+          - name: url
+            description: '{{ doc("url") }}'
+
+      - name: link
+        identifier: '{{ var("salesforce_marketing_cloud_link_identifier", "link") }}'
+        description: '{{ doc("link") }}'
+        columns:
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: id
+            description: '{{ doc("link_id") }}'
+          - name: alias
+            description: '{{ doc("alias") }}'
+          - name: last_clicked
+            description: '{{ doc("last_clicked") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}' 
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: total_clicks
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: unique_clicks
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: url
+            description: '{{ doc("_fivetran_synced") }}'
+
+      - name: link_send
+        identifier: '{{ var("salesforce_marketing_cloud_link_send_identifier", "link_send") }}'
+        description: '{{ doc("link_send") }}'
+        columns:
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: link_id
+            description: '{{ doc("link_id") }}'
+          - name: send_id
+            description: '{{ doc("send_id") }}'
+
+      - name: list
+        identifier: '{{ var("salesforce_marketing_cloud_list_identifier", "list") }}'
+        description: '{{ doc("list") }}'
+        columns:
+          - name: id
+            description: '{{ doc("list_id") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: description
+            description: '{{ doc("description") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: name
+            description: '{{ doc("list_name") }}'
+          - name: type
+            description: '{{ doc("list_type") }}'
+
+      - name: send
+        identifier: '{{ var("salesforce_marketing_cloud_send_identifier", "send") }}'
+        description: '{{ doc("send") }}'
+        columns:
+          - name: id
+            description: '{{ doc("send_id") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: bcc_email
+            description: '{{ doc("bcc_email") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: duplicates
+            description: '{{ doc("duplicates") }}'
+          - name: email_id
+            description: '{{ doc("email_id") }}'
+          - name: email_name
+            description: '{{ doc("email_name") }}'
+          - name: existing_undeliverables
+            description: '{{ doc("existing_undeliverables") }}'
+          - name: existing_unsubscribes
+            description: '{{ doc("existing_unsubscribes") }}'
+          - name: forwarded_emails
+            description: '{{ doc("forwarded_emails") }}'
+          - name: from_address
+            description: '{{ doc("from_address") }}'
+          - name: from_name
+            description: '{{ doc("from_name") }}'
+          - name: hard_bounces
+            description: '{{ doc("hard_bounces") }}'
+          - name: invalid_addresses
+            description: '{{ doc("invalid_addresses") }}'
+          - name: is_always_on
+            description: '{{ doc("is_always_on") }}'
+          - name: is_multipart
+            description: '{{ doc("is_multipart") }}'
+          - name: missing_addresses
+            description: '{{ doc("missing_addresses") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: number_delivered
+            description: '{{ doc("number_delivered") }}'
+          - name: number_errored
+            description: '{{ doc("number_errored") }}'
+          - name: number_excluded
+            description: '{{ doc("number_excluded") }}'
+          - name: number_sent
+            description: '{{ doc("number_sent") }}'
+          - name: number_targeted
+            description: '{{ doc("number_targeted") }}'
+          - name: other_bounces
+            description: '{{ doc("other_bounces") }}'
+          - name: preview_url
+            description: '{{ doc("preview_url") }}'
+          - name: send_date
+            description: '{{ doc("send_date") }}'
+          - name: soft_bounces
+            description: '{{ doc("soft_bounces") }}'
+          - name: status
+            description: '{{ doc("send_status") }}'
+          - name: subject
+            description: '{{ doc("subject") }}'
+          - name: unique_clicks
+            description: '{{ doc("unique_clicks") }}'
+          - name: unique_opens
+            description: '{{ doc("unique_opens") }}'
+          - name: unsubscribes
+            description: '{{ doc("unsubscribes") }}'
+
+      - name: subscriber
+        identifier: '{{ var("salesforce_marketing_cloud_subscriber_identifier", "subscriber") }}'
+        description: '{{ doc("subscriber") }}'
+        columns:
+          - name: id
+            description: '{{ doc("subscriber_id") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: email_address
+            description: '{{ doc("email_address") }}'
+          - name: email_type_preference
+            description: '{{ doc("email_type_preference") }}'
+          - name: status
+            description: '{{ doc("subscriber_status") }}'
+          - name: subscriber_key
+            description: '{{ doc("subscriber_key") }}'
+          - name: unsubscribed_date
+            description: '{{ doc("unsubscribed_date") }}'
+
+      - name: list_subscriber
+        identifier: '{{ var("salesforce_marketing_cloud_list_subscriber_identifier", "list_subscriber") }}'
+        description: '{{ doc("list_subscriber") }}'
+        columns:
+          - name: id
+            description: '{{ doc("list_subscriber_id") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: list_id
+            description: '{{ doc("list_id") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: status
+            description: '{{ doc("status") }}'
+          - name: subscriber_key
+            description: '{{ doc("subscriber_key") }}'

@@ -1,0 +1,25 @@
+config-version: 2
+name: 'salesforce_marketing_cloud'
+version: '0.1.0'
+require-dbt-version: [">=1.3.0", "<2.0.0"]
+
+models:
+  salesforce_marketing_cloud:
+    +schema: salesforce_marketing_cloud
+    +materialized: table
+    intermediate:
+      +materialized: ephemeral
+    staging:
+      +materialized: view
+      +schema: stg_salesforce_marketing_cloud
+
+
+vars:
+    email: "{{ source('salesforce_marketing_cloud','email') }}"
+    event: "{{ source('salesforce_marketing_cloud','event') }}"
+    link: "{{ source('salesforce_marketing_cloud','link') }}"
+    list: "{{ source('salesforce_marketing_cloud','list') }}"
+    send: "{{ source('salesforce_marketing_cloud','send') }}"
+    subscriber: "{{ source('salesforce_marketing_cloud','subscriber') }}"
+    list_subscriber: "{{ source('salesforce_marketing_cloud','list_subscriber') }}"
+    link_send: "{{ source('salesforce_marketing_cloud','link_send') }}"
