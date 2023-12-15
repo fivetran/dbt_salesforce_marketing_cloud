@@ -1,5 +1,5 @@
-{% docs _fivetran_deleted %} REPLACE {% enddocs %}
-{% docs _fivetran_synced %} REPLACE {% enddocs %}
+{% docs _fivetran_deleted %} Indicates if the record was soft-deleted by Fivetran. {% enddocs %}
+{% docs _fivetran_synced %} Timestamp the record was synced by Fivetran. {% enddocs %}
 {% docs alias %} Name of link contained in message. {% enddocs %}
 {% docs asset_id %} Unique identifier of an asset. {% enddocs %}
 {% docs asset_type_id %} Unique identifier of the event. {% enddocs %}
