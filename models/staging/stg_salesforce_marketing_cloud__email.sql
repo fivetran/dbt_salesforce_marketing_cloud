@@ -1,7 +1,8 @@
 
 with base as (
 
-    select * 
+    select
+        {{ dbt.star(ref('stg_salesforce_marketing_cloud__email_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__email_base') }}
 ),
 
@@ -25,7 +26,9 @@ final as (
     
     select 
         source_relation, 
-        _fivetran_deleted,
+        _fivetran_start,
+        _fivetran_end,
+        _fivetran_active,
         _fivetran_synced,
         asset_id,
         asset_type_id,

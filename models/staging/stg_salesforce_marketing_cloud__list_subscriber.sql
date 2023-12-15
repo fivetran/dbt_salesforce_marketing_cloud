@@ -1,7 +1,7 @@
 
 with base as (
 
-    select * 
+    {{ dbt.star(ref('stg_salesforce_marketing_cloud__list_subscriber_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__list_subscriber_base') }}
 ),
 
@@ -24,7 +24,10 @@ fields as (
 final as (
     
     select 
-        source_relation, 
+        source_relation,
+        _fivetran_start,
+        _fivetran_end,
+        _fivetran_active,
         _fivetran_synced,
         created_date,
         id as list_subscriber_id,

@@ -1,7 +1,7 @@
 
 with base as (
 
-    select * 
+    {{ dbt.star(ref('stg_salesforce_marketing_cloud__subscriber_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__subscriber_base') }}
 ),
 
@@ -31,7 +31,7 @@ final as (
         email_address,
         email_type_preference,
         id as subscriber_id,
-        status,
+        status as subscriber_status,
         subscriber_key,
         unsubscribed_date
     from fields

@@ -1,7 +1,8 @@
 
 with base as (
 
-    select * 
+    select 
+        {{ dbt.star(ref('stg_salesforce_marketing_cloud__event_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__event_base') }}
 ),
 
