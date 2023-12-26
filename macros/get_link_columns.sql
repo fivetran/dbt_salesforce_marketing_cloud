@@ -6,8 +6,8 @@
     {"name": "id", "datatype": dbt.type_int()},
     {"name": "alias", "datatype": dbt.type_string()},
     {"name": "last_clicked", "datatype": dbt.type_timestamp()},
-    {"name": "created_date", "datatype": "datetime"},
-    {"name": "modified_date", "datatype": "datetime"},
+    {"name": "created_date", "datatype": dbt.type_timestamp()},
+    {"name": "modified_date", "datatype": dbt.type_timestamp()},
     {"name": "total_clicks", "datatype": dbt.type_int()},
     {"name": "unique_clicks", "datatype": dbt.type_int()},
     {"name": "url ", "datatype": dbt.type_string()}

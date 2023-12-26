@@ -28,8 +28,10 @@ seeds:
       _fivetran_synced: "timestamp"
       _fivetran_start: "timestamp"
       _fivetran_end: "timestamp"
-      event_data:
+    event_data:
+      +column_types: 
         created_date: "timestamp"
-      subscriber_data:
+    subscriber_data:
+      +column_types: 
         created_date: "timestamp"
         unsubscribed_date: "timestamp"
