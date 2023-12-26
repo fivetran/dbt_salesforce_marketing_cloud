@@ -1,4 +1,4 @@
-{{ config(enabled=var('salesforce_marketing_cloud__list', true)) }}
+{{ config(enabled=var('salesforce_marketing_cloud__list_enabled', true)) }}
 
 with base as (
 
