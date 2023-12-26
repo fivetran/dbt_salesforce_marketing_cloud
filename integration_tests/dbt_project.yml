@@ -8,6 +8,18 @@ dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
 
+vars:
+  salesforce_marketing_cloud:
+    salesforce_marketing_cloud_schema: salesforce_marketing_cloud_integration_tests_01
+    salesforce_marketing_cloud_email_identifier: "email_data"
+    salesforce_marketing_cloud_event_identifier: "event_data"
+    salesforce_marketing_cloud_link_identifier: "link_data"
+    salesforce_marketing_cloud_list_identifier: "list_data"
+    salesforce_marketing_cloud_send_identifier: "send_data"
+    salesforce_marketing_cloud_subscriber_identifier: "subscriber_data"
+    salesforce_marketing_cloud_list_subscriber_identifier: "list_subscriber_data"
+    salesforce_marketing_cloud_link_send_identifier: "link_send_data"
+
 seeds:
   salesforce_marketing_cloud_integration_tests:
     +quote_columns: "{{ true if target.type == 'redshift' else false }}"
@@ -17,15 +29,3 @@ seeds:
       _fivetran_start: "timestamp"
       _fivetran_end: "timestamp"
       created_date: "timestamp"
-
-vars:
-  salesforce_marketing_cloud:
-    salesforce_marketing_cloud_schema: salesforce_marketing_cloud_integration_tests_03
-    salesforce_marketing_cloud_email_identifier: "email_data"
-    salesforce_marketing_cloud_event_identifier: "event_data"
-    salesforce_marketing_cloud_link_identifier: "link_data"
-    salesforce_marketing_cloud_list_identifier: "list_data"
-    salesforce_marketing_cloud_send_identifier: "send_data"
-    salesforce_marketing_cloud_subscriber_identifier: "subscriber_data"
-    salesforce_marketing_cloud_list_subscriber_identifier: "list_subscriber_data"
-    salesforce_marketing_cloud_link_send_identifier: "link_send_data"
