@@ -28,13 +28,13 @@ final as (
         source_relation, 
         _fivetran_deleted,
         _fivetran_synced,
-        created_date,
+        cast(created_date as {{ dbt.type_timestamp() }}) as created_date,
         email_address,
         email_type_preference,
         cast(id as {{ dbt.type_string() }}) as subscriber_id,
         status as subscriber_status,
         subscriber_key,
-        unsubscribed_date
+        cast(unsubscribed_date as {{ dbt.type_timestamp() }}) as unsubscribed_date
     from fields
 )
 
