@@ -24,7 +24,7 @@ with events as(
     lower(event_type) = 'sent' as is_sent,
     lower(event_type) = 'survey' as is_survey_response,
     lower(event_type) = 'unsubscribe' as is_unsubscribe
-  from ref('stg_salesforce_marketing_cloud__event')
+  from from {{ ref('stg_salesforce_marketing_cloud__event') }}
   where not _fivetran_deleted
 
   {% if is_incremental() %}
@@ -34,11 +34,11 @@ with events as(
 
 ), sends as (
   select *
-  from ref('stg_salesforce_marketing_cloud__send')
+  from from {{ ref('stg_salesforce_marketing_cloud__send') }}
 
 ), emails as (
   select *
-  from ref('stg_salesforce_marketing_cloud__email')
+  from from {{ ref('stg_salesforce_marketing_cloud__email') }}
 
 ), joined as (
   select

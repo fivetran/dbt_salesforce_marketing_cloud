@@ -1,12 +1,12 @@
 -- aggregates at the email grain.
 with emails as (
   select *
-  from ref('stg_salesforce_marketing_cloud__email')
+  from from {{ ref('stg_salesforce_marketing_cloud__email') }}
   where _fivetran_active
 
 ), sends as (
   select *
-  from ref('stg_salesforce_marketing_cloud__send')
+  from from {{ ref('stg_salesforce_marketing_cloud__send') }}
   where not _fivetran_deleted
 
 ), sends_stats as (
@@ -36,7 +36,7 @@ with emails as (
 
 ), events_enhanced as ( 
   select *
-  from ref('int_salesforce_marketing_cloud__events_enhanced')
+  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), events_stats as (
   select 

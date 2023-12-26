@@ -3,12 +3,12 @@ with subscribers as (
   select 
     *,
     lower(status) = 'active' as is_active
-  from ref('stg_salesforce_marketing_cloud__subscriber')
+  from from {{ ref('stg_salesforce_marketing_cloud__subscriber') }}
   where not _fivetran_deleted
 
 ), events_enhanced as ( 
   select *
-  from ref('int_salesforce_marketing_cloud__events_enhanced')
+  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), aggs as (
     select 

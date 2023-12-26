@@ -5,14 +5,14 @@ with subscribers as (
   select 
     *,
     lower(status) = 'active' as is_active
-  from ref('stg_salesforce_marketing_cloud__subscriber')
+  from from {{ ref('stg_salesforce_marketing_cloud__subscriber') }}
   where not _fivetran_deleted
 
 ), lists_subscribers as (
   select
     subscriber_key,
     list_id
-  from ref('stg_salesforce_marketing_cloud__list_subscriber')
+  from from {{ ref('stg_salesforce_marketing_cloud__list_subscriber') }}
   where _fivetran_active
 
 ), lists as ( --make lists optional

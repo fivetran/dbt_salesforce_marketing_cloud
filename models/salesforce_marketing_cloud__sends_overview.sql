@@ -1,7 +1,7 @@
 -- aggregates at the send grain.
 with sends as (
   select *
-  from ref('stg_salesforce_marketing_cloud__send')
+  from from {{ ref('stg_salesforce_marketing_cloud__send') }}
   where not _fivetran_deleted
 
 ), sends_aggs as (
@@ -14,7 +14,7 @@ with sends as (
 
 ), events_enhanced as ( 
   select *
-  from ref('int_salesforce_marketing_cloud__events_enhanced')
+  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), events_stats as (
   select 
