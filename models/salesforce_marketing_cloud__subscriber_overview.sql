@@ -24,7 +24,7 @@ with subscribers as (
         end as days_subscribed, #}
       case when subscribers.unsubscribed_date is not null 
         then {{ dbt.datediff("subscribers.created_date", "subscribers.unsubscribed_date", "day") }} 
-        else {{ dbt.datediff("subscribers.created_date", "current_date()", "day") }} 
+        else {{ dbt.datediff("subscribers.created_date", "current_date", "day") }} 
         end as days_subscribed,
       sum(case when events_enhanced.is_sent then 1 else 0 end) as number_of_sends,
       max(case when events_enhanced.is_sent then events_enhanced.event_date end) as most_recent_send,

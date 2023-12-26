@@ -3,4 +3,4 @@ id,_fivetran_deleted,_fivetran_synced,created_date,email_address,email_type_pref
 388555576,FALSE,2023-12-13 20:34:41,2023-12-13 09:40:00,user2@email.com,HTML,Active,807,
 319849514,FALSE,2023-10-06 06:21:27,2022-12-07 23:53:00,user3@email.com,HTML,Held,J20,
 273088192,FALSE,2023-10-06 06:21:27,2022-08-05 00:54:00,user4@email.com,HTML,Held,239,
-260017401,FALSE,2023-10-06 06:21:27,2022-06-27 12:27:00,user5@email.com,HTML,Held,235,
+260017401,FALSE,2023-10-06 06:21:27,2022-06-27 12:27:00,user5@email.com,HTML,Held,235,2023-12-13 09:53:00
