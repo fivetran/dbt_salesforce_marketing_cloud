@@ -1,3 +1,14 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='event_id',
+        partition_by={'field': 'created_date', 'data_type': 'date'} if target.type not in ('spark','databricks') else ['created_date'],
+        cluster_by=['created_date'],
+        incremental_strategy = 'merge' if target.type not in ('postgres', 'redshift') else 'delete+insert',
+        file_format = 'delta' 
+    )
+}}
+
 -- events grain with sends and email information added.
 with events as( 
   select
@@ -15,6 +26,11 @@ with events as(
     lower(event_type) = 'unsubscribe' as is_unsubscribe
   from ref('stg_salesforce_marketing_cloud__event')
   where not _fivetran_deleted
+
+  {% if is_incremental() %}
+  -- we look at the most recent 28 days for this model's window functions to compute properly
+  and created_date >= coalesce((select max(created_date) from {{ this }}), '2010-01-01')
+  {% endif %}
 
 ), sends as (
   select *

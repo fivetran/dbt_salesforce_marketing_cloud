@@ -2,7 +2,7 @@
 with base as (
 
     select
-        {{ dbt.star(ref('stg_salesforce_marketing_cloud__email_base')) }}
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__email_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__email_base') }}
 ),
 

@@ -1,3 +1,5 @@
+{{ config(enabled=var('salesforce_marketing_cloud__list_enabled', true)) }}
+
 {{
     fivetran_utils.union_data(
         table_identifier='list_subscriber', 

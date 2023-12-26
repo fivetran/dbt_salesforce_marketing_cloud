@@ -74,6 +74,35 @@ models:
   - name: stg_salesforce_marketing_cloud__link
     description: '{{ doc("stg_salesforce_marketing_cloud__link") }}'
     columns:
+      - name: _fivetran_synced
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: id
+        description: '{{ doc("link_id") }}'
+      - name: alias
+        description: '{{ doc("alias") }}'
+      - name: last_clicked
+        description: '{{ doc("last_clicked") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}' 
+      - name: modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: total_clicks
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: unique_clicks
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: url
+        description: '{{ doc("_fivetran_synced") }}'
+
+  - name: stg_salesforce_marketing_cloud__link_send
+    description: '{{ doc("stg_salesforce_marketing_cloud__link_send") }}'
+    columns:
+      - name: _fivetran_synced
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: link_id
+        description: '{{ doc("link_id") }}'
+      - name: send_id
+        description: '{{ doc("send_id") }}'
+
   - name: stg_salesforce_marketing_cloud__list
     description: '{{ doc("stg_salesforce_marketing_cloud__list") }}'
     columns:
@@ -90,7 +119,7 @@ models:
       - name: list_name
         description: '{{ doc("list_name") }}'
       - name: type
-        description: '{{ doc("type") }}'
+        description: '{{ doc("list_type") }}'
 
   - name: stg_salesforce_marketing_cloud__send
     description: '{{ doc("stg_salesforce_marketing_cloud__send") }}'
@@ -152,7 +181,7 @@ models:
       - name: soft_bounces
         description: '{{ doc("soft_bounces") }}'
       - name: status
-        description: '{{ doc("status") }}'
+        description: '{{ doc("send_status") }}'
       - name: subject
         description: '{{ doc("subject") }}'
       - name: unique_clicks
@@ -178,7 +207,7 @@ models:
       - name: email_type_preference
         description: '{{ doc("email_type_preference") }}'
       - name: status
-        description: '{{ doc("status") }}'
+        description: '{{ doc("subscriber_status") }}'
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
       - name: unsubscribed_date
@@ -198,10 +227,6 @@ models:
       - name: modified_date
         description: '{{ doc("modified_date") }}'
       - name: status
-        description: '{{ doc("status") }}'
+        description: '{{ doc("subscriber_status") }}'
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
-
-  - name: stg_salesforce_marketing_cloud__link_send
-    description: '{{ doc("stg_salesforce_marketing_cloud__link_send") }}'
-    columns:

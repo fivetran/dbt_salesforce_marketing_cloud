@@ -1,0 +1,6 @@
+id,_fivetran_deleted,_fivetran_synced,created_date,email_address,email_type_preference,status,subscriber_key,unsubscribed_date
+388556612,FALSE,2023-12-13 20:34:41.458000 UTC,2023-12-13T09:53:00,user1@email.com,HTML,Active,jo8,
+388555576,FALSE,2023-12-13 20:34:41.433000 UTC,2023-12-13T09:40:00,user2@email.com,HTML,Active,807,
+319849514,FALSE,2023-10-06 06:21:27.639000 UTC,2022-12-07T23:53:00,user3@email.com,HTML,Held,J20,
+273088192,FALSE,2023-10-06 06:21:27.638000 UTC,2022-08-05T00:54:00,user4@email.com,HTML,Held,239,
+260017401,FALSE,2023-10-06 06:21:27.637000 UTC,2022-06-27T12:27:00,user5@email.com,HTML,Held,234,

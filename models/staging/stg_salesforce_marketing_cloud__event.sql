@@ -2,7 +2,7 @@
 with base as (
 
     select 
-        {{ dbt.star(ref('stg_salesforce_marketing_cloud__event_base')) }}
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__event_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__event_base') }}
 ),
 
@@ -31,7 +31,7 @@ final as (
         batch_id,
         bounce_category,
         bounce_type,
-        created_date,
+        cast(created_date as date) as created_date,
         event_date,
         event_type,
         id as event_id,

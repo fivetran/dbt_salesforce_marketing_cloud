@@ -29,7 +29,7 @@
 {% docs invalid_addresses %} Specifies the number of invalid addresses associated with a send. {% enddocs %}
 {% docs is_always_on %} Indicates whether the request can be performed while the system is is maintenance mode. A value of true indicates that the system processes the request. {% enddocs %}
 {% docs is_multipart %} Indicates whether the email is sent with Multipart/MIME enabled. {% enddocs %}
-{% last_clicked %} Indicates last time a link included in a message was clicked. {% enddocs %}
+{% docs last_clicked %} Indicates last time a link included in a message was clicked. {% enddocs %}
 {% docs link %} REPLACE {% enddocs %}
 {% docs link_id %} Unique identifier of the link. {% enddocs %}
 {% docs link_send %} Each record represents the relationship between a link and a send record. {% enddocs %}

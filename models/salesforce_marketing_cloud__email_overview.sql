@@ -36,7 +36,7 @@ with emails as (
 
 ), events_enhanced as ( 
   select *
-  from ref('salesforce_marketing_cloud__events_enhanced')
+  from ref('int_salesforce_marketing_cloud__events_enhanced')
 
 ), events_stats as (
   select 

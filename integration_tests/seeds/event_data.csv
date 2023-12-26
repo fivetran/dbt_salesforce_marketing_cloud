@@ -1,0 +1,6 @@
+event_type,id,_fivetran_deleted,_fivetran_synced,batch_id,bounce_category,bounce_type,created_date,event_date,modified_date,opt_in_subscriber_key,question,send_id,smtp_code,smtp_reason,subscriber_key,triggered_send_id,unsubscribed_list_id,url
+Sent,rlDvAlkuIN+VD8tsqLdKkRdaiOg=,FALSE,2023-10-06 06:21:26.947000 UTC,0,,,,2023-10-05T20:46:35.970000,,,,1491592,0,,random2@random.com,,0,
+Sent,kInRpDUgNobOsBGxBYaobpB1px0=,FALSE,2023-10-06 06:21:26.946000 UTC,0,,,,2023-10-05T20:46:35.970000,,,,1491592,0,,random1@random.com,,0,
+Sent,IsfQrN9Vit7I4Dyww+PnNFyal84=,FALSE,2023-10-06 06:21:26.944000 UTC,0,,,,2023-10-05T20:35:35.240000,,,,1491591,0,,random2@random.com,,0,
+Sent,oWvcpj4so1+XxXgLgNkq3AchNvI=,FALSE,2023-10-06 06:21:26.943000 UTC,0,,,,2023-10-05T20:35:35.240000,,,,1491591,0,,random1@random.com,,0,
+Sent,jsSGXrFAloj+mvhhBpVGtgKDoU8=,FALSE,2023-10-06 06:21:26.941000 UTC,0,,,,2023-10-05T20:35:35.240000,,,,1491591,0,,random3@random.com,,0,

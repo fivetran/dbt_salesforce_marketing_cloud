@@ -1,3 +1,5 @@
+{{ config(enabled=var('salesforce_marketing_cloud__link_enabled', true)) }}
+
 -- sends joined with links. Similar to the subscriber_lists, I wanted to include this for users but not sure the best placement.
 with sends as (
   select *

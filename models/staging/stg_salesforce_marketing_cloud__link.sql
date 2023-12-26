@@ -1,7 +1,8 @@
+{{ config(enabled=var('salesforce_marketing_cloud__link_enabled', true)) }}
 
 with base as (
 
-    {{ dbt.star(ref('stg_salesforce_marketing_cloud__link_base')) }}
+    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__link_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__link_base') }}
 ),
 

@@ -8,7 +8,7 @@ models:
     +schema: salesforce_marketing_cloud
     +materialized: table
     intermediate:
-      +materialized: ephemeral
+      +materialized: table
     staging:
       +materialized: view
       +schema: stg_salesforce_marketing_cloud

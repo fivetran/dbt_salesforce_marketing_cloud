@@ -80,6 +80,7 @@ sources:
       - name: link
         identifier: '{{ var("salesforce_marketing_cloud_link_identifier", "link") }}'
         description: '{{ doc("link") }}'
+        enabled: var('salesforce_marketing_cloud__link_enabled', true)
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
@@ -103,6 +104,7 @@ sources:
       - name: link_send
         identifier: '{{ var("salesforce_marketing_cloud_link_send_identifier", "link_send") }}'
         description: '{{ doc("link_send") }}'
+        enabled: var('salesforce_marketing_cloud__link_enabled', true)
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
@@ -114,6 +116,7 @@ sources:
       - name: list
         identifier: '{{ var("salesforce_marketing_cloud_list_identifier", "list") }}'
         description: '{{ doc("list") }}'
+        enabled: var('salesforce_marketing_cloud__list_enabled', true)
         columns:
           - name: id
             description: '{{ doc("list_id") }}'
@@ -129,6 +132,26 @@ sources:
             description: '{{ doc("list_name") }}'
           - name: type
             description: '{{ doc("list_type") }}'
+
+      - name: list_subscriber
+        identifier: '{{ var("salesforce_marketing_cloud_list_subscriber_identifier", "list_subscriber") }}'
+        description: '{{ doc("list_subscriber") }}'
+        enabled: var('salesforce_marketing_cloud__list_enabled', true)
+        columns:
+          - name: id
+            description: '{{ doc("list_subscriber_id") }}'
+          - name: _fivetran_synced
+            description: '{{ doc("_fivetran_synced") }}'
+          - name: created_date
+            description: '{{ doc("created_date") }}'
+          - name: list_id
+            description: '{{ doc("list_id") }}'
+          - name: modified_date
+            description: '{{ doc("modified_date") }}'
+          - name: status
+            description: '{{ doc("subscriber_status") }}'
+          - name: subscriber_key
+            description: '{{ doc("subscriber_key") }}'
 
       - name: send
         identifier: '{{ var("salesforce_marketing_cloud_send_identifier", "send") }}'
@@ -223,22 +246,3 @@ sources:
             description: '{{ doc("subscriber_key") }}'
           - name: unsubscribed_date
             description: '{{ doc("unsubscribed_date") }}'
-
-      - name: list_subscriber
-        identifier: '{{ var("salesforce_marketing_cloud_list_subscriber_identifier", "list_subscriber") }}'
-        description: '{{ doc("list_subscriber") }}'
-        columns:
-          - name: id
-            description: '{{ doc("list_subscriber_id") }}'
-          - name: _fivetran_synced
-            description: '{{ doc("_fivetran_synced") }}'
-          - name: created_date
-            description: '{{ doc("created_date") }}'
-          - name: list_id
-            description: '{{ doc("list_id") }}'
-          - name: modified_date
-            description: '{{ doc("modified_date") }}'
-          - name: status
-            description: '{{ doc("status") }}'
-          - name: subscriber_key
-            description: '{{ doc("subscriber_key") }}'
