@@ -2,7 +2,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__link_send_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__link_send_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__link_send_base') }}
 ),
 
@@ -26,8 +27,8 @@ final as (
     
     select 
         source_relation,
-        link_id,
-        send_id,
+        cast(link_id as {{ dbt.type_string() }}) as link_id,
+        cast(send_id as {{ dbt.type_string() }}) as send_id,
         _fivetran_synced,
         _fivetran_deleted
 

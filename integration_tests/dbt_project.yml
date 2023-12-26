@@ -1,5 +1,5 @@
-name: 'sage_intacct_integration_tests'
-version: '0.3.0'
+name: 'salesforce_marketing_cloud_integration_tests'
+version: '0.1.0'
 config-version: 2
 
 profile: 'integration_tests'
@@ -8,9 +8,19 @@ dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
 
+seeds:
+  salesforce_marketing_cloud_integration_tests:
+    +quote_columns: "{{ true if target.type == 'redshift' else false }}"
+    +column_types: 
+      id: "{{ 'string' if target.type in ('bigquery', 'spark', 'databricks') else 'varchar' }}"
+      _fivetran_synced: "timestamp"
+      _fivetran_start: "timestamp"
+      _fivetran_end: "timestamp"
+      created_date: "timestamp"
+
 vars:
   salesforce_marketing_cloud:
-    salesforce_marketing_cloud_schema: salesforce_marketing_cloud_integration_tests_01
+    salesforce_marketing_cloud_schema: salesforce_marketing_cloud_integration_tests_03
     salesforce_marketing_cloud_email_identifier: "email_data"
     salesforce_marketing_cloud_event_identifier: "event_data"
     salesforce_marketing_cloud_link_identifier: "link_data"

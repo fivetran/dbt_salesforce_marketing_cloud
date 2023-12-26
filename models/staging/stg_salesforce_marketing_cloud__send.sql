@@ -1,7 +1,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__send_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__send_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__send_base') }}
 ),
 
@@ -30,7 +31,7 @@ final as (
         bcc_email,
         created_date,
         duplicates,
-        email_id,
+        cast(email_id as {{ dbt.type_string() }}) as email_id,
         email_name,
         existing_undeliverables,
         existing_unsubscribes,
@@ -38,7 +39,7 @@ final as (
         from_address,
         from_name,
         hard_bounces,
-        id as send_id,
+        cast(id as {{ dbt.type_string() }}) as send_id,
         invalid_addresses,
         is_always_on,
         is_multipart,
@@ -53,7 +54,7 @@ final as (
         preview_url,
         send_date,
         soft_bounces,
-        status,
+        status as send_status,
         subject,
         unique_clicks,
         unique_opens,

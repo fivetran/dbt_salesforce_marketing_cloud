@@ -68,7 +68,7 @@ models:
         description: '{{ doc("triggered_send_id") }}'
       - name: unsubscribed_list_id
         description: '{{ doc("unsubscribed_list_id") }}'
-      - name: url
+      - name: event_url
         description: '{{ doc("url") }}'
 
   - name: stg_salesforce_marketing_cloud__link
@@ -76,9 +76,9 @@ models:
     columns:
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
-      - name: id
+      - name: link_id
         description: '{{ doc("link_id") }}'
-      - name: alias
+      - name: link_alias
         description: '{{ doc("alias") }}'
       - name: last_clicked
         description: '{{ doc("last_clicked") }}'
@@ -90,7 +90,7 @@ models:
         description: '{{ doc("_fivetran_synced") }}'
       - name: unique_clicks
         description: '{{ doc("_fivetran_synced") }}'
-      - name: url
+      - name: link_url
         description: '{{ doc("_fivetran_synced") }}'
 
   - name: stg_salesforce_marketing_cloud__link_send
@@ -112,13 +112,13 @@ models:
         description: '{{ doc("_fivetran_synced") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
-      - name: description
+      - name: list_description
         description: '{{ doc("description") }}'
       - name: modified_date
         description: '{{ doc("modified_date") }}'
       - name: list_name
         description: '{{ doc("list_name") }}'
-      - name: type
+      - name: list_type
         description: '{{ doc("list_type") }}'
 
   - name: stg_salesforce_marketing_cloud__send
@@ -180,7 +180,7 @@ models:
         description: '{{ doc("send_date") }}'
       - name: soft_bounces
         description: '{{ doc("soft_bounces") }}'
-      - name: status
+      - name: send_status
         description: '{{ doc("send_status") }}'
       - name: subject
         description: '{{ doc("subject") }}'

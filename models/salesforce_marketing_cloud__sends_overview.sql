@@ -1,7 +1,7 @@
 -- aggregates at the send grain.
 with sends as (
   select *
-  from from {{ ref('stg_salesforce_marketing_cloud__send') }}
+  from {{ ref('stg_salesforce_marketing_cloud__send') }}
   where not _fivetran_deleted
 
 ), sends_aggs as (
@@ -14,10 +14,11 @@ with sends as (
 
 ), events_enhanced as ( 
   select *
-  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
+  from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), events_stats as (
   select 
+    sends.source_relation,
     sends.send_id,
     sum(case when events_enhanced.is_sent then 1 else 0 end) as total_send_events,
     sum(case when events_enhanced.is_open then 1 else 0 end) as total_open_events,
@@ -29,7 +30,8 @@ with sends as (
   from sends
   left join events_enhanced
     on events_enhanced.send_id = sends.send_id
-  group by 1
+    and events_enhanced.source_relation = sends.source_relation
+  group by 1,2
 
 ), joined as (
   select
@@ -44,6 +46,8 @@ with sends as (
   from sends_aggs
   left join events_stats
     on events_stats.send_id = sends_aggs.send_id
+    and events_stats.source_relation = sends_aggs.source_relation
 )
+
 select * 
 from joined

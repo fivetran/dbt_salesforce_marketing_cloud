@@ -31,20 +31,20 @@ final as (
         batch_id,
         bounce_category,
         bounce_type,
-        cast(created_date as date) as created_date,
-        event_date,
+        created_date,
+        cast(event_date as date) as event_date,
         event_type,
-        id as event_id,
+        cast(id as {{ dbt.type_string() }}) as event_id,
         modified_date,
         opt_in_subscriber_key,
         question,
-        send_id,
+        cast(send_id as {{ dbt.type_string() }}) as send_id,
         smtp_code,
         smtp_reason,
         subscriber_key,
         triggered_send_id,
         unsubscribed_list_id,
-        url
+        url as event_url
     from fields
 )
 

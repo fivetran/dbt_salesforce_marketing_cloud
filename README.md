@@ -68,8 +68,6 @@ packages:
 By default, this package runs using your destination and the `salesforce_marketing_cloud` schema. If this is not where your Salesforce Marketing Cloud data is (for example, if your Salesforce Marketing Cloud schema is named `salesforce_marketing_cloud_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
-# dbt_project.yml
-
 vars:
     salesforce_marketing_cloud_database: your_database_name
     salesforce_marketing_cloud_schema: your_schema_name
@@ -78,8 +76,6 @@ vars:
 If you have multiple Salesforce Marketing Cloud connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `salesforce_marketing_cloud_union_schemas` OR `salesforce_marketing_cloud_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
 ```yml
-# dbt_project.yml
-
 vars:
     salesforce_marketing_cloud_union_schemas: ['salesforce_marketing_cloud_usa','salesforce_marketing_cloud_canada'] # use this if the data is in different schemas/datasets of the same database/project
     salesforce_marketing_cloud_union_databases: ['salesforce_marketing_cloud_usa','salesforce_marketing_cloud_canada'] # use this if the data is in different databases/projects but uses the same schema name
@@ -91,14 +87,12 @@ To connect your multiple schema/database sources to the package models, follow t
 
 
 ## Step 4: Enable/Disable Variables
-[If necessary, use this step to detail enable/disable variables. See below as an example. If this is not necessary you can delete this section.]
-
-By default, this package does not bring in data from the Salesforce Marketing Cloud example source tables. However, if you would like the package to bring in these sources and the downstream models, add the following configuration to your `dbt_project.yml`:
+By default, this package brings in data from the Salesforce Marketing Cloud `link_*` and `list_*` source tables. However, if you have disabled syncing these sources, add the following configuration to your `dbt_project.yml` to disable the corresponding models:
 
 ```yml
 vars:
-    salesforce_marketing_cloud__using_core_contacts: True # default = False
-    salesforce_marketing_cloud__using_core_mailing_lists: True # default = False
+    salesforce_marketing_cloud__link_enabled: false # default = true
+    salesforce_marketing_cloud__list_enabled: false # default = true
 ```
 
 ## (Optional) Step 5: Additional configurations
@@ -108,8 +102,6 @@ vars:
 This package includes all source columns defined in the macros folder. You can add more columns using our pass-through column variables. These variables allow for the pass-through fields to be aliased (`alias`) and casted (`transform_sql`) if desired, but not required. Datatype casting is configured via a sql snippet within the `transform_sql` key. You may add the desired sql while omitting the `as field_name` at the end and your custom pass-though fields will be casted accordingly. Use the below format for declaring the respective pass-through variables:
 
 ```yml
-# dbt_project.yml
-
 vars:
   salesforce_marketing_cloud__X_through_columns:
     - name: "that_field"
@@ -128,8 +120,6 @@ vars:
 By default this package will build the Salesforce Marketing Cloud staging models within a schema titled (<target_schema> + `_stg_salesforce_marketing_cloud`) and the Salesforce Marketing Cloud final models within a schema titled (<target_schema> + `_salesforce_marketing_cloud`) in your target database. If this is not where you would like your modeled qualtrics data to be written to, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
-# dbt_project.yml
-
 models:
   salesforce_marketing_cloud:
     +schema: my_new_schema_name # leave blank for just the target_schema
@@ -143,8 +133,6 @@ If an individual source table has a different name than the package expects, add
 > IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/dbt_project.yml) variable declarations to see the expected names.
 
 ```yml
-# dbt_project.yml
-
 vars:
     salesforce_marketing_cloud_<default_source_table_name>_identifier: your_table_name 
 ```

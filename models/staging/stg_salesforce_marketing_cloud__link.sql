@@ -2,7 +2,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__link_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__link_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__link_base') }}
 ),
 
@@ -26,7 +27,7 @@ final as (
     
     select 
         source_relation,
-        id as link_id,
+        cast(id as {{ dbt.type_string() }}) as link_id,
         alias as link_alias,
         last_clicked as link_last_clicked,
         created_date,

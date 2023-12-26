@@ -1,17 +1,15 @@
 -- aggregates at the subscriber grain
 with subscribers as ( 
-  select 
-    *,
-    lower(status) = 'active' as is_active
-  from from {{ ref('stg_salesforce_marketing_cloud__subscriber') }}
-  where not _fivetran_deleted
+  select *
+  from {{ ref('int_salesforce_marketing_cloud__subscribers_enhanced') }}
 
 ), events_enhanced as ( 
   select *
-  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
+  from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), aggs as (
     select 
+      subscribers.source_relation,
       subscribers.subscriber_id,
       subscribers.subscriber_key,
       subscribers.created_date,
@@ -24,9 +22,9 @@ with subscribers as (
         when unsubscribed_date is not null then datediff('day', created_date, unsubscribed_date)
         else datediff('day', created_date, current_date())
         end as days_subscribed, #}
-      case when unsubscribed_date is not null 
-        then {{ dbt.datediff("created_date", "unsubscribed_date", "day") }} 
-        else {{ dbt.datediff("created_date", "current_date()", "day") }} 
+      case when subscribers.unsubscribed_date is not null 
+        then {{ dbt.datediff("subscribers.created_date", "subscribers.unsubscribed_date", "day") }} 
+        else {{ dbt.datediff("subscribers.created_date", "current_date()", "day") }} 
         end as days_subscribed,
       sum(case when events_enhanced.is_sent then 1 else 0 end) as number_of_sends,
       max(case when events_enhanced.is_sent then events_enhanced.event_date end) as most_recent_send,
@@ -43,7 +41,9 @@ with subscribers as (
     from subscribers
     left join events_enhanced
         on events_enhanced.subscriber_key = subscribers.subscriber_key
-    group by {{ dbt_utils.group_by(9) }}
+        and events_enhanced.source_relation = subscribers.source_relation
+    {{ dbt_utils.group_by(10) }}
 )
+
 select * 
 from aggs

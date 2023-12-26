@@ -2,7 +2,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__list_subscriber_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__list_subscriber_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__list_subscriber_base') }}
 ),
 
@@ -31,8 +32,8 @@ final as (
         _fivetran_active,
         _fivetran_synced,
         created_date,
-        id as list_subscriber_id,
-        list_id,
+        cast(id as {{ dbt.type_string() }}) as list_subscriber_id,
+        cast(list_id as {{ dbt.type_string() }}) as list_id,
         modified_date,
         status,
         subscriber_key

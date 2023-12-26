@@ -2,7 +2,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__list_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__list_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__list_base') }}
 ),
 
@@ -31,11 +32,11 @@ final as (
         _fivetran_active,
         _fivetran_synced,
         created_date,
-        description,
-        id as list_id,
+        description as list_description,
+        cast(id as {{ dbt.type_string() }}) as list_id,
         modified_date,
         name as list_name,
-        type
+        type as list_type
     from fields
 )
 

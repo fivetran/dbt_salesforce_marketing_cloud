@@ -34,7 +34,7 @@ final as (
         asset_type_id,
         character_set,
         created_date,
-        id as email_id,
+        cast(id as {{ dbt.type_string() }}) as email_id,
         modified_date,
         name as email_name,
         pre_header,

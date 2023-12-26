@@ -1,17 +1,18 @@
 -- aggregates at the email grain.
 with emails as (
   select *
-  from from {{ ref('stg_salesforce_marketing_cloud__email') }}
+  from {{ ref('stg_salesforce_marketing_cloud__email') }}
   where _fivetran_active
 
 ), sends as (
   select *
-  from from {{ ref('stg_salesforce_marketing_cloud__send') }}
+  from {{ ref('stg_salesforce_marketing_cloud__send') }}
   where not _fivetran_deleted
 
 ), sends_stats as (
   select 
     emails.email_id,
+    emails.source_relation,
     count(distinct sends.send_id) as total_unique_sends,
     coalesce(sum(sends.number_sent), 0) as total_emails_sent,
     coalesce(sum(sends.unique_opens), 0) as total_unique_opens,
@@ -24,7 +25,8 @@ with emails as (
   from emails
   left join sends
     on sends.email_id = emails.email_id
-  group by 1
+    and sends.source_relation = emails.source_relation
+  group by 1,2
 
 ), sends_aggs as (
   select
@@ -36,11 +38,12 @@ with emails as (
 
 ), events_enhanced as ( 
   select *
-  from from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
+  from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
 
 ), events_stats as (
   select 
     emails.email_id,
+    emails.source_relation,
     sum(case when events_enhanced.is_sent then 1 else 0 end) as total_send_events,
     sum(case when events_enhanced.is_open then 1 else 0 end) as total_open_events,
     sum(case when events_enhanced.is_click then 1 else 0 end) as total_click_events,
@@ -51,9 +54,11 @@ with emails as (
   from emails
   left join sends
     on sends.email_id = emails.email_id
+    and sends.source_relation = emails.source_relation
   left join events_enhanced
     on events_enhanced.send_id = sends.send_id
-  group by 1
+    and events_enhanced.source_relation = sends.source_relation
+  group by 1,2
 
 ), joined as (
   select
@@ -80,8 +85,11 @@ with emails as (
   from emails
   left join sends_aggs
     on sends_aggs.email_id = emails.email_id
+    and sends_aggs.source_relation = emails.source_relation
   left join events_stats
     on events_stats.email_id = emails.email_id
+    and events_stats.source_relation = emails.source_relation
 )
+
 select * 
 from joined

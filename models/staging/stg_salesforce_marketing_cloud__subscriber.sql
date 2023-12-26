@@ -1,7 +1,8 @@
 
 with base as (
 
-    {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__subscriber_base')) }}
+    select
+        {{ dbt_utils.star(ref('stg_salesforce_marketing_cloud__subscriber_base')) }}
     from {{ ref('stg_salesforce_marketing_cloud__subscriber_base') }}
 ),
 
@@ -30,7 +31,7 @@ final as (
         created_date,
         email_address,
         email_type_preference,
-        id as subscriber_id,
+        cast(id as {{ dbt.type_string() }}) as subscriber_id,
         status as subscriber_status,
         subscriber_key,
         unsubscribed_date
