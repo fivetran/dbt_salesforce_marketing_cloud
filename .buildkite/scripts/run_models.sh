@@ -21,7 +21,7 @@ dbt run --target "$db" --full-refresh
 dbt test --target "$db"
 dbt run --target "$db"
 dbt test --target "$db"
-dbt run --vars '{variable_to_test: false}' --full-refresh --target "$db"
+dbt run --vars '{salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --full-refresh --target "$db"
 dbt test --target "$db"
 
 dbt run-operation fivetran_utils.drop_schemas_automation --target "$db"

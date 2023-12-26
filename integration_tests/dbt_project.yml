@@ -10,7 +10,7 @@ dispatch:
 
 vars:
   salesforce_marketing_cloud:
-    salesforce_marketing_cloud_schema: sfmc_integration_tests_01
+    salesforce_marketing_cloud_schema: salesforce_marketing_cloud_integration_tests_01
     salesforce_marketing_cloud_email_identifier: "email_data"
     salesforce_marketing_cloud_event_identifier: "event_data"
     salesforce_marketing_cloud_link_identifier: "link_data"
