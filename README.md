@@ -58,7 +58,8 @@ dispatch:
 
 ## Step 2: Install the package
 Include the following Salesforce Marketing Cloud package version in your `packages.yml` file:
-> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+> [!TIP]
+> Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
