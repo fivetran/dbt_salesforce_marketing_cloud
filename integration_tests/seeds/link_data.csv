@@ -1,6 +1,6 @@
-id,alias,total_clicks,unique_clicks,url,last_clicked,_fivetran_deleted,_fivetran_synced
-102005,,,,htps://url.com,,FALSE,2023-12-26 14:34:37
-102004,,,,htps://url.com,,FALSE,2023-12-26 14:34:37
-102003,,,,htps://url.com,,FALSE,2023-12-26 14:34:37
-103054,,,,htps://url.com,,FALSE,2023-12-26 14:34:37
-103233,,,,htps://url.com,,FALSE,2023-12-26 14:34:37
+id,alias,total_clicks,unique_clicks,url,last_clicked,_fivetran_deleted,_fivetran_synced,created_date,modified_date
+102005,,,,htps://url.com,,FALSE,2023-12-26 14:34:37,,
+102004,,,,htps://url.com,,FALSE,2023-12-26 14:34:37,,
+102003,,,,htps://url.com,,FALSE,2023-12-26 14:34:37,,
+103054,,,,htps://url.com,,FALSE,2023-12-26 14:34:37,,
+103233,,,,htps://url.com,,FALSE,2023-12-26 14:34:37,,

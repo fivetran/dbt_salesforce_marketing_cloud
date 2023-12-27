@@ -11,8 +11,12 @@ sources:
         columns:
           - name: id
             description: '{{ doc("email_id") }}'
-          - name: _fivetran_deleted
-            description: '{{ doc("_fivetran_deleted") }}'
+          - name: _fivetran_active
+            description: '{{ doc("_fivetran_active") }}'
+          - name: _fivetran_start
+            description: '{{ doc("_fivetran_start") }}'
+          - name: _fivetran_end
+            description: '{{ doc("_fivetran_end") }}'
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
           - name: character_set
@@ -84,6 +88,8 @@ sources:
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
           - name: id
             description: '{{ doc("link_id") }}'
           - name: alias
@@ -95,11 +101,11 @@ sources:
           - name: modified_date
             description: '{{ doc("modified_date") }}'
           - name: total_clicks
-            description: '{{ doc("_fivetran_synced") }}'
+            description: '{{ doc("total_clicks") }}'
           - name: unique_clicks
-            description: '{{ doc("_fivetran_synced") }}'
+            description: '{{ doc("unique_clicks") }}'
           - name: url
-            description: '{{ doc("_fivetran_synced") }}'
+            description: '{{ doc("url") }}'
 
       - name: link_send
         identifier: '{{ var("salesforce_marketing_cloud_link_send_identifier", "link_send") }}'
@@ -108,6 +114,8 @@ sources:
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
+          - name: _fivetran_deleted
+            description: '{{ doc("_fivetran_deleted") }}'
           - name: link_id
             description: '{{ doc("link_id") }}'
           - name: send_id

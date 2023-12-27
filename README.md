@@ -25,17 +25,19 @@ The main focus of the package is to transform the core object tables into analyt
       - Datetime fields are renamed to `<event happened>_at`.
   - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
   - Generates a comprehensive data dictionary of your Salesforce Marketing Cloud data through the [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/).
-    - [Insert additional custom details here.]
-
-> This package does not apply freshness tests to source data due to the variability of survey cadences.
 
 <!--section="salesforce_marketing_cloud_model"-->
 The following table provides a detailed list of all models materialized within this package by default. 
-> TIP: See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/qualtrics).
+> [!TIP]
+> See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/qualtrics).
 
-| **model**                 | **description**                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [model_here]()  | Model description   |
+| **model** | **description**|
+| --------- | -------------- |
+| [salesforce_marketing_cloud__email_overview]() | Each record represents an email with aggregated send and event data for each. |
+| [salesforce_marketing_cloud__sends_links]() | Each record represents a link and the corresponding send(s). |
+| [salesforce_marketing_cloud__sends_overview]() | Each record represents a send with aggregated event data for each. |
+| [salesforce_marketing_cloud__subscriber_lists]() | Each record represents a list and the corresponding subscriber(s).|
+| [salesforce_marketing_cloud__subscriber_overview]() | Each record represents a subscriber with aggregated event data for each. |
 <!--section-end-->
 
 # 🎯 How do I use the dbt package?
@@ -77,17 +79,16 @@ If you have multiple Salesforce Marketing Cloud connectors in Fivetran and would
 
 ```yml
 vars:
-    salesforce_marketing_cloud_union_schemas: ['salesforce_marketing_cloud_usa','salesforce_marketing_cloud_canada'] # use this if the data is in different schemas/datasets of the same database/project
-    salesforce_marketing_cloud_union_databases: ['salesforce_marketing_cloud_usa','salesforce_marketing_cloud_canada'] # use this if the data is in different databases/projects but uses the same schema name
+    salesforce_marketing_cloud_union_schemas: ['sfmc_usa','sfmc_canada'] # use this if the data is in different schemas/datasets of the same database/project
+    salesforce_marketing_cloud_union_databases: ['sfmc_usa','sfmc_canada'] # use this if the data is in different databases/projects but uses the same schema name
 ```
 
 Please be aware that the native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
-
 ## Step 4: Enable/Disable Variables
-By default, this package brings in data from the Salesforce Marketing Cloud `link_*` and `list_*` source tables. However, if you have disabled syncing these sources, add the following configuration to your `dbt_project.yml` to disable the corresponding models:
+By default, this package brings in data from the Salesforce Marketing Cloud `link` and `list` source tables. However, if you have disabled syncing these sources, you will need to add the following configuration to your `dbt_project.yml`:
 
 ```yml
 vars:
@@ -97,27 +98,8 @@ vars:
 
 ## (Optional) Step 5: Additional configurations
 
-[If necessary, use this step to detail passthrough variables. See below as an example. If this is not necessary you can delete this section.]
-### Passing Through Additional Fields
-This package includes all source columns defined in the macros folder. You can add more columns using our pass-through column variables. These variables allow for the pass-through fields to be aliased (`alias`) and casted (`transform_sql`) if desired, but not required. Datatype casting is configured via a sql snippet within the `transform_sql` key. You may add the desired sql while omitting the `as field_name` at the end and your custom pass-though fields will be casted accordingly. Use the below format for declaring the respective pass-through variables:
-
-```yml
-vars:
-  salesforce_marketing_cloud__X_through_columns:
-    - name: "that_field"
-      alias: "renamed_to_this_field"
-      transform_sql: "cast(renamed_to_this_field as string)"
-  salesforce_marketing_cloud__Y_pass_through_columns:
-    - name: "this_field"
-  salesforce_marketing_cloud__Z_contact_pass_through_columns:
-    - name: "old_name"
-      alias: "new_name"
-```
-
-> Please create an [issue](https://github.com/fivetran/dbt_salesforce_marketing_cloud/issues) if you'd like to see passthrough column support for other tables in the Qualtrics schema.
-
 ### Changing the Build Schema
-By default this package will build the Salesforce Marketing Cloud staging models within a schema titled (<target_schema> + `_stg_salesforce_marketing_cloud`) and the Salesforce Marketing Cloud final models within a schema titled (<target_schema> + `_salesforce_marketing_cloud`) in your target database. If this is not where you would like your modeled qualtrics data to be written to, add the following configuration to your `dbt_project.yml` file:
+By default this package will build the Salesforce Marketing Cloud staging models within a schema titled (<target_schema> + `_stg_sfmc`) and the Salesforce Marketing Cloud final models within a schema titled (<target_schema> + `_sfmc`) in your target database. If this is not where you would like your modeled Salesforce Marketing Cloud data to be written, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 models:
@@ -130,26 +112,26 @@ models:
 ### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
 
-> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/dbt_project.yml) variable declarations to see the expected names.
+> [!IMPORTANT]
+> See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/dbt_project.yml) variable declarations to see the expected names.
 
 ```yml
 vars:
     salesforce_marketing_cloud_<default_source_table_name>_identifier: your_table_name 
 ```
-</details>
-
 
 ## (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for details</summary>
 <br>
-    
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
 </details>
 
 
 # 🔍 Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
-> IMPORTANT: If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
+> [!IMPORTANT]
+> If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
     
 ```yml
 packages:

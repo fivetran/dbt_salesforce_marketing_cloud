@@ -4,10 +4,16 @@ models:
   - name: stg_salesforce_marketing_cloud__email
     description: '{{ doc("stg_salesforce_marketing_cloud__email") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
+      - name: _fivetran_active
+        description: '{{ doc("_fivetran_active") }}'
+      - name: _fivetran_start
+        description: '{{ doc("_fivetran_start") }}'
+      - name: _fivetran_end
+        description: '{{ doc("_fivetran_end") }}'
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
       - name: character_set
@@ -32,6 +38,8 @@ models:
   - name: stg_salesforce_marketing_cloud__event
     description: '{{ doc("stg_salesforce_marketing_cloud__event") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: event_type
         description: '{{ doc("event_type") }}'
       - name: event_id
@@ -74,21 +82,25 @@ models:
   - name: stg_salesforce_marketing_cloud__link
     description: '{{ doc("stg_salesforce_marketing_cloud__link") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
+      - name: _fivetran_deleted
+        description: '{{ doc("_fivetran_deleted") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
       - name: link_alias
         description: '{{ doc("alias") }}'
-      - name: last_clicked
+      - name: link_last_clicked
         description: '{{ doc("last_clicked") }}'
       - name: created_date
         description: '{{ doc("created_date") }}' 
       - name: modified_date
         description: '{{ doc("modified_date") }}'
-      - name: total_clicks
+      - name: link_total_clicks
         description: '{{ doc("_fivetran_synced") }}'
-      - name: unique_clicks
+      - name: link_unique_clicks
         description: '{{ doc("_fivetran_synced") }}'
       - name: link_url
         description: '{{ doc("_fivetran_synced") }}'
@@ -96,8 +108,12 @@ models:
   - name: stg_salesforce_marketing_cloud__link_send
     description: '{{ doc("stg_salesforce_marketing_cloud__link_send") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
+      - name: _fivetran_deleted
+        description: '{{ doc("_fivetran_deleted") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
       - name: send_id
@@ -106,10 +122,18 @@ models:
   - name: stg_salesforce_marketing_cloud__list
     description: '{{ doc("stg_salesforce_marketing_cloud__list") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: list_id
         description: '{{ doc("list_id") }}'
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
+      - name: _fivetran_active
+        description: '{{ doc("_fivetran_active") }}'
+      - name: _fivetran_start
+        description: '{{ doc("_fivetran_start") }}'
+      - name: _fivetran_end
+        description: '{{ doc("_fivetran_end") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: list_description
@@ -124,6 +148,8 @@ models:
   - name: stg_salesforce_marketing_cloud__send
     description: '{{ doc("stg_salesforce_marketing_cloud__send") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
       - name: _fivetran_deleted
@@ -194,6 +220,8 @@ models:
   - name: stg_salesforce_marketing_cloud__subscriber
     description: '{{ doc("stg_salesforce_marketing_cloud__subscriber") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
       - name: _fivetran_deleted
@@ -206,7 +234,7 @@ models:
         description: '{{ doc("email_address") }}'
       - name: email_type_preference
         description: '{{ doc("email_type_preference") }}'
-      - name: status
+      - name: subscriber_status
         description: '{{ doc("subscriber_status") }}'
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
@@ -216,10 +244,18 @@ models:
   - name: stg_salesforce_marketing_cloud__list_subscriber
     description: '{{ doc("stg_salesforce_marketing_cloud__list_subscriber") }}'
     columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
       - name: list_subscriber_id
         description: '{{ doc("list_subscriber_id") }}'
       - name: _fivetran_synced
         description: '{{ doc("_fivetran_synced") }}'
+      - name: _fivetran_active
+        description: '{{ doc("_fivetran_active") }}'
+      - name: _fivetran_start
+        description: '{{ doc("_fivetran_start") }}'
+      - name: _fivetran_end
+        description: '{{ doc("_fivetran_end") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: list_id

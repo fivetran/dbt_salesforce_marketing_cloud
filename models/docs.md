@@ -1,5 +1,8 @@
 {% docs _fivetran_deleted %} Indicates if the record was soft-deleted by Fivetran. {% enddocs %}
 {% docs _fivetran_synced %} Timestamp the record was synced by Fivetran. {% enddocs %}
+{% docs _fivetran_start %} Timestamp when the record was first created or modified in the source. {% enddocs %}
+{% docs _fivetran_end %} Timestamp marking the end of a record being active. {% enddocs %}
+{% docs _fivetran_active %} TRUE if it is the currently active record. FALSE if it is a historical version of the record. Only one version of the record can be TRUE. {% enddocs %}
 {% docs alias %} Name of link contained in message. {% enddocs %}
 {% docs asset_id %} Unique identifier of an asset. {% enddocs %}
 {% docs asset_type_id %} Unique identifier of the event. {% enddocs %}
@@ -58,6 +61,7 @@
 {% docs smtp_code %} Contains SMTP code related to a bounced email. {% enddocs %}
 {% docs smtp_reason %} Contains SMTP reason associated with a bounced email {% enddocs %}
 {% docs soft_bounces %} Indicates number of soft bounces associated with a specific send. {% enddocs %}
+{% docs source_relation %} The record's source if the unioning functionality is used. Otherwise this field will be empty. {% enddocs %}
 {% docs stg_salesforce_marketing_cloud__email %} REPLACE {% enddocs %}
 {% docs stg_salesforce_marketing_cloud__event %} REPLACE {% enddocs %}
 {% docs stg_salesforce_marketing_cloud__link %} REPLACE {% enddocs %}
