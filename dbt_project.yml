@@ -5,13 +5,14 @@ require-dbt-version: [">=1.3.0", "<2.0.0"]
 
 models:
   salesforce_marketing_cloud:
-    +schema: salesforce_marketing_cloud
+    +schema: sfmc
     +materialized: table
     intermediate:
       +materialized: table
+      +schema: int_sfmc
     staging:
       +materialized: view
-      +schema: stg_salesforce_marketing_cloud
+      +schema: stg_sfmc
 
 
 vars:
