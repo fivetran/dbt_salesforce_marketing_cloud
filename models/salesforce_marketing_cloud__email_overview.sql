@@ -2,7 +2,7 @@
 with emails as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__email') }}
-  where _fivetran_active
+  where coalesce(_fivetran_active, true)
 
 ), sends as (
   select *
