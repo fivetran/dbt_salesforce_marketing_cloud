@@ -1,11 +1,11 @@
 -- aggregates at the subscriber grain
 with subscribers as ( 
   select *
-  from {{ ref('int_salesforce_marketing_cloud__subscribers_enhanced') }}
+  from {{ ref('salesforce_marketing_cloud__subscribers_enhanced') }}
 
 ), events_enhanced as ( 
   select *
-  from {{ ref('int_salesforce_marketing_cloud__events_enhanced') }}
+  from {{ ref('salesforce_marketing_cloud__events_enhanced') }}
 
 ), aggs as (
     select 
