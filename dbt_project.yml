@@ -24,3 +24,4 @@ vars:
     subscriber: "{{ source('salesforce_marketing_cloud','subscriber') }}"
     list_subscriber: "{{ source('salesforce_marketing_cloud','list_subscriber') }}"
     link_send: "{{ source('salesforce_marketing_cloud','link_send') }}"
+    triggered_send: "{{ source('salesforce_marketing_cloud','triggered_send') }}"

@@ -311,3 +311,60 @@ models:
         description: '{{ doc("subscriber_status") }}'
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
+
+  - name: stg_salesforce_marketing_cloud__triggered_send
+    description: '{{ doc("triggered_send") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - triggered_send_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: triggered_send_id
+        description: '{{ doc("triggered_send_id") }}'
+      - name: _fivetran_deleted
+        description: '{{ doc("_fivetran_deleted") }}'
+      - name: _fivetran_synced
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: auto_add_subscribers
+        description: '{{ doc("auto_add_subscribers") }}'
+      - name: auto_update_subscribers
+        description: '{{ doc("auto_update_subscribers") }}'
+      - name: bcc_email
+        description: '{{ doc("bcc_email") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: triggered_send_description
+        description: '{{ doc("description") }}'
+      - name: dynamic_email_subject
+        description: '{{ doc("dynamic_email_subject") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+      - name: email_subject
+        description: '{{ doc("subject") }}'
+      - name: from_address
+        description: '{{ doc("from_address") }}'
+      - name: from_name
+        description: '{{ doc("from_name") }}'
+      - name: is_multipart
+        description: '{{ doc("is_multipart") }}'
+      - name: is_wrapped
+        description: '{{ doc("is_wrapped") }}'
+      - name: list_id
+        description: '{{ doc("list_id") }}'
+      - name: modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: triggered_send_name
+        description: '{{ doc("name") }}'
+      - name: priority
+        description: '{{ doc("priority") }}'
+      - name: send_limit
+        description: '{{ doc("send_limit") }}'
+      - name: send_window_close
+        description: '{{ doc("send_window_close") }}'
+      - name: send_window_open
+        description: '{{ doc("send_window_open") }}'
+      - name: triggered_send_status
+        description: '{{ doc("triggered_send_status") }}'

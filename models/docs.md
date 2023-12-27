@@ -14,6 +14,10 @@
 
 {% docs asset_type_id %} Unique identifier of the event. {% enddocs %}
 
+{% docs auto_add_subscribers %} Indicates whether a triggered send recipient is added to a subscriber list. {% enddocs %}
+
+{% docs auto_update_subscribers %} Indicates if any subscriber information is updated as part of a triggered send. {% enddocs %}
+
 {% docs batch_id %} Ties triggered send sent events to other events (like clicks and opens that occur at a later date and time) {% enddocs %}
 
 {% docs bcc_email %} Indicates email addresses to receive blind carbon copy of a message. {% enddocs %}
@@ -33,6 +37,8 @@
 {% docs description %} Describes and provides information regarding the object. {% enddocs %}
 
 {% docs duplicates %} Represent the number of duplicate email addresses associated with a send (exists only when a send occurs to multiple lists). {% enddocs %}
+
+{% docs dynamic_email_subject %} Contains content to be used in a dynamic subject line. {% enddocs %}
 
 {% docs email %} Each record represents an email. {% enddocs %}
 
@@ -72,6 +78,8 @@
 
 {% docs is_multipart %} Indicates whether the email is sent with Multipart/MIME enabled. {% enddocs %}
 
+{% docs is_wrapped %} Indicates whether an email send contains the links necessary to process tracking information for clicks. {% enddocs %}
+
 {% docs last_clicked %} Indicates last time a link included in a message was clicked. {% enddocs %}
 
 {% docs link %} Each record represents a link. {% enddocs %}
@@ -108,6 +116,8 @@
 
 {% docs most_recent_survey_response %} Subscriber's most recent survey response. {% enddocs %}
 
+{% docs name %} Name of the object. {% enddocs %}
+
 {% docs number_delivered %} Number of sent emails that did not bounce. {% enddocs %}
 
 {% docs number_errored %} Number of emails not sent as part of a send because an error occurred while trying to build the email. {% enddocs %}
@@ -140,6 +150,8 @@
 
 {% docs preview_url %} Indicates URL used to preview the message associated with a send. {% enddocs %}
 
+{% docs priority %} Defines the priority for a triggered send. Valid values include Low, Medium, and High. {% enddocs %}
+
 {% docs question %} Specifies question associated with a survey event. {% enddocs %}
 
 {% docs send %} Each record represents a send. {% enddocs %}
@@ -148,7 +160,13 @@
 
 {% docs send_id %} Unique identifier of the send. {% enddocs %}
 
+{% docs send_limit %} Indicates limit of messages to send as part of a send definition within a predefined send window. {% enddocs %}
+
 {% docs send_status %} Defines status of an address. {% enddocs %}
+
+{% docs send_window_close %} Defines the end of a send window for a send definition. {% enddocs %}
+
+{% docs send_window_open %} Defines the beginning of a send window for a send definition. {% enddocs %}
 
 {% docs smtp_code %} Contains SMTP code related to a bounced email. {% enddocs %}
 
@@ -204,7 +222,11 @@
 
 {% docs total_unsubscribes %} Total unsubscribes from the sends source. {% enddocs %}
 
+{% docs triggered_send %} Each record represents a triggered send. {% enddocs %}
+
 {% docs triggered_send_id %} Unique identifier of the triggered send. {% enddocs %}
+
+{% docs triggered_send_status %} Status of the triggered send. {% enddocs %}
 
 {% docs unique_clicks %} Indicates number of unique clicks. {% enddocs %}
 
