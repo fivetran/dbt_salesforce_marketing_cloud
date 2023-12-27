@@ -16,6 +16,7 @@ with sends as (
 
 ), joined as (
   select 
+    sends.source_relation,
     sends.send_id, 
     sends.bcc_email, 
     sends.duplicates, 

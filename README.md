@@ -35,7 +35,7 @@ The following table provides a detailed list of all models materialized within t
 | [salesforce_marketing_cloud__email_overview]() | Each record represents an email with aggregated send and event data for each. |
 | [salesforce_marketing_cloud__sends_links]() | Each record represents a link and the corresponding send(s). |
 | [salesforce_marketing_cloud__sends_overview]() | Each record represents a send with aggregated event data for each. |
-| [salesforce_marketing_cloud__subscriber_lists]() | Each record represents a list and the corresponding subscriber(s).|
+| [salesforce_marketing_cloud__subscriber_lists]() | Each record represents a list and the corresponding subscriber(s). |
 | [salesforce_marketing_cloud__subscriber_overview]() | Each record represents a subscriber with aggregated event data for each. |
 <!--section-end-->
 

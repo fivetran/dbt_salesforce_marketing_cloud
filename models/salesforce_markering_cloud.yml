@@ -1,0 +1,356 @@
+version: 2
+
+models:
+
+  - name: salesforce_marketing_cloud__email_overview
+    description: Each record represents an email with aggregated send and event data for each.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - email_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: _fivetran_start
+        description: '{{ doc("_fivetran_start") }}'
+      - name: _fivetran_end
+        description: '{{ doc("_fivetran_end") }}'
+      - name: _fivetran_active
+        description: '{{ doc("_fivetran_active") }}'
+      - name: _fivetran_synced
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: asset_id
+        description: '{{ doc("asset_id") }}'
+      - name: asset_type_id
+        description: '{{ doc("asset_type_id") }}'
+      - name: character_set
+        description: '{{ doc("character_set") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+      - name: modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: email_name
+        description: '{{ doc("email_name") }}'
+      - name: pre_header
+        description: '{{ doc("pre_header") }}'
+      - name: subject
+        description: '{{ doc("subject") }}'
+      - name: text_body
+        description: '{{ doc("text_body") }}'
+      - name: total_unique_sends
+        description: '{{ doc("total_unique_sends") }}'
+      - name: total_emails_sent
+        description: '{{ doc("total_emails_sent") }}'
+      - name: total_unique_opens
+        description: '{{ doc("total_unique_opens") }}'
+      - name: total_unique_clicks
+        description: '{{ doc("total_unique_clicks") }}'
+      - name: total_unsubscribes
+        description: '{{ doc("total_unsubscribes") }}'
+      - name: total_forwards
+        description: '{{ doc("total_forwards") }}'
+      - name: total_deliveries
+        description: '{{ doc("total_deliveries") }}'
+      - name: total_targets
+        description: '{{ doc("total_targets") }}'
+      - name: total_bounces
+        description: '{{ doc("total_bounces") }}'
+      - name: open_rate
+        description: '{{ doc("open_rate") }}'
+      - name: click_through_rate
+        description: '{{ doc("click_through_rate") }}'
+      - name: unsubscribe_rate
+        description: '{{ doc("unsubscribe_rate") }}'
+      - name: total_send_events
+        description: '{{ doc("total_send_events") }}'
+      - name: total_open_events
+        description: '{{ doc("total_open_events") }}'
+      - name: total_click_events
+        description: '{{ doc("total_click_events") }}'
+      - name: total_bounce_events
+        description: '{{ doc("total_bounce_events") }}'
+      - name: total_forward_events
+        description: '{{ doc("total_forward_events") }}'
+      - name: total_unsubscribe_events
+        description: '{{ doc("total_unsubscribe_events") }}'
+      - name: total_survey_response_events
+        description: '{{ doc("total_survey_response_events") }}'
+
+  - name: salesforce_marketing_cloud__sends_links
+    description: Each record represents a link and the corresponding send(s).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - send_id
+            - link_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: send_id
+        description: '{{ doc("send_id") }}'
+      - name: bcc_email
+        description: '{{ doc("bcc_email") }}'
+      - name: duplicates
+        description: '{{ doc("duplicates") }}'
+      - name: email_name
+        description: '{{ doc("email_name") }}'
+      - name: existing_undeliverables
+        description: '{{ doc("existing_undeliverables") }}'
+      - name: existing_unsubscribes
+        description: '{{ doc("existing_unsubscribes") }}'
+      - name: forwarded_emails
+        description: '{{ doc("forwarded_emails") }}'
+      - name: from_address
+        description: '{{ doc("from_address") }}'
+      - name: from_name
+        description: '{{ doc("from_name") }}'
+      - name: hard_bounces
+        description: '{{ doc("hard_bounces") }}'
+      - name: invalid_addresses
+        description: '{{ doc("invalid_addresses") }}'
+      - name: is_always_on
+        description: '{{ doc("is_always_on") }}'
+      - name: is_multipart
+        description: '{{ doc("is_multipart") }}'
+      - name: missing_addresses
+        description: '{{ doc("missing_addresses") }}'
+      - name: number_delivered
+        description: '{{ doc("number_delivered") }}'
+      - name: number_errored
+        description: '{{ doc("number_errored") }}'
+      - name: number_excluded
+        description: '{{ doc("number_excluded") }}'
+      - name: number_sent
+        description: '{{ doc("number_sent") }}'
+      - name: number_targeted
+        description: '{{ doc("number_targeted") }}'
+      - name: other_bounces
+        description: '{{ doc("other_bounces") }}'
+      - name: preview_url
+        description: '{{ doc("preview_url") }}'
+      - name: soft_bounces
+        description: '{{ doc("soft_bounces") }}'
+      - name: send_status
+        description: '{{ doc("send_status") }}'
+      - name: subject
+        description: '{{ doc("subject") }}'
+      - name: unique_clicks
+        description: '{{ doc("unique_clicks") }}'
+      - name: unique_opens
+        description: '{{ doc("unique_opens") }}'
+      - name: unsubscribes
+        description: '{{ doc("unsubscribes") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+      - name: send_created_date
+        description: '{{ doc("created_date") }}'
+      - name: send_modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: send_date
+        description: '{{ doc("send_date") }}'
+      - name: link_id
+        description: '{{ doc("link_id") }}'
+      - name: link_alias
+        description: '{{ doc("alias") }}'
+      - name: link_total_clicks
+        description: '{{ doc("total_clicks") }}'
+      - name: link_unique_clicks
+        description: '{{ doc("unique_clicks") }}'
+      - name: link_url
+        description: '{{ doc("url") }}'
+      - name: link_last_clicked
+        description: '{{ doc("last_clicked") }}'
+
+  - name: salesforce_marketing_cloud__sends_overview
+    description: Each record represents a send with aggregated event data for each.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - send_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: _fivetran_deleted
+        description: '{{ doc("_fivetran_deleted") }}'
+      - name: _fivetran_synced
+        description: '{{ doc("_fivetran_synced") }}'
+      - name: bcc_email
+        description: '{{ doc("bcc_email") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: duplicates
+        description: '{{ doc("duplicates") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+      - name: email_name
+        description: '{{ doc("email_name") }}'
+      - name: existing_undeliverables
+        description: '{{ doc("existing_undeliverables") }}'
+      - name: existing_unsubscribes
+        description: '{{ doc("existing_unsubscribes") }}'
+      - name: forwarded_emails
+        description: '{{ doc("forwarded_emails") }}'
+      - name: from_address
+        description: '{{ doc("from_address") }}'
+      - name: from_name
+        description: '{{ doc("from_name") }}'
+      - name: hard_bounces
+        description: '{{ doc("hard_bounces") }}'
+      - name: send_id
+        description: '{{ doc("send_id") }}'
+      - name: invalid_addresses
+        description: '{{ doc("invalid_addresses") }}'
+      - name: is_always_on
+        description: '{{ doc("is_always_on") }}'
+      - name: is_multipart
+        description: '{{ doc("is_multipart") }}'
+      - name: missing_addresses
+        description: '{{ doc("missing_addresses") }}'
+      - name: modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: number_delivered
+        description: '{{ doc("number_delivered") }}'
+      - name: number_errored
+        description: '{{ doc("number_errored") }}'
+      - name: number_excluded
+        description: '{{ doc("number_excluded") }}'
+      - name: number_sent
+        description: '{{ doc("number_sent") }}'
+      - name: number_targeted
+        description: '{{ doc("number_targeted") }}'
+      - name: other_bounces
+        description: '{{ doc("other_bounces") }}'
+      - name: preview_url
+        description: '{{ doc("preview_url") }}'
+      - name: send_date
+        description: '{{ doc("send_date") }}'
+      - name: soft_bounces
+        description: '{{ doc("soft_bounces") }}'
+      - name: send_status
+        description: '{{ doc("send_status") }}'
+      - name: subject
+        description: '{{ doc("subject") }}'
+      - name: unique_clicks
+        description: '{{ doc("unique_clicks") }}'
+      - name: unique_opens
+        description: '{{ doc("unique_opens") }}'
+      - name: unsubscribes
+        description: '{{ doc("unsubscribes") }}'
+      - name: open_rate
+        description: '{{ doc("open_rate") }}'
+      - name: click_through_rate
+        description: '{{ doc("click_through_rate") }}'
+      - name: unsubscribe_rate
+        description: '{{ doc("unsubscribe_rate") }}'
+      - name: total_send_events
+        description: '{{ doc("total_send_events") }}'
+      - name: total_open_events
+        description: '{{ doc("total_open_events") }}'
+      - name: total_click_events
+        description: '{{ doc("total_click_events") }}'
+      - name: total_bounce_events
+        description: '{{ doc("total_bounce_events") }}'
+      - name: total_forward_events
+        description: '{{ doc("total_forward_events") }}'
+      - name: total_unsubscribe_events
+        description: '{{ doc("total_unsubscribe_events") }}'
+      - name: total_survey_response_events
+        description: '{{ doc("total_survey_response_events") }}'
+
+  - name: salesforce_marketing_cloud__subscriber_lists
+    description: Each record represents a list and the corresponding subscriber(s).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - list_id
+            - subscriber_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: subscriber_id
+        description: '{{ doc("subscriber_id") }}'
+      - name: email_address
+        description: '{{ doc("email_address") }}'
+      - name: email_type_preference
+        description: '{{ doc("email_type_preference") }}'
+      - name: subscriber_key
+        description: '{{ doc("subscriber_key") }}'
+      - name: subscriber_status
+        description: '{{ doc("subscriber_status") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: unsubscribed_date
+        description: '{{ doc("unsubscribed_date") }}'
+      - name: list_id
+        description: '{{ doc("list_id") }}'
+      - name: list_description
+        description: '{{ doc("description") }}'
+      - name: list_name
+        description: '{{ doc("list_name") }}'
+      - name: list_type
+        description: '{{ doc("list_type") }}'
+      - name: list_created_date
+        description: '{{ doc("created_date") }}'
+      - name: list_modified_date
+        description: '{{ doc("modified_date") }}'
+
+  - name: salesforce_marketing_cloud__subscriber_overview
+    description: Each record represents a subscriber with aggregated event data for each. 
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - subscriber_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: subscriber_id
+        description: '{{ doc("subscriber_id") }}'
+      - name: subscriber_key
+        description: '{{ doc("subscriber_key") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: email_address
+        description: '{{ doc("email_address") }}'
+      - name: email_type_preference
+        description: '{{ doc("email_type_preference") }}'
+      - name: subscriber_status
+        description: '{{ doc("subscriber_status") }}'
+      - name: is_active
+        description: '{{ doc("is_active") }}'
+      - name: unsubscribed_date
+        description: '{{ doc("unsubscribed_date") }}'
+      - name: days_subscribed
+        description: '{{ doc("days_subscribed") }}'
+      - name: number_of_sends
+        description: '{{ doc("number_of_sends") }}'
+      - name: most_recent_send
+        description: '{{ doc("most_recent_send") }}'
+      - name: number_of_opens
+        description: '{{ doc("number_of_opens") }}'
+      - name: most_recent_open
+        description: '{{ doc("most_recent_open") }}'
+      - name: number_of_clicks
+        description: '{{ doc("number_of_clicks") }}'
+      - name: most_recent_click
+        description: '{{ doc("most_recent_click") }}'
+      - name: number_of_bounces
+        description: '{{ doc("number_of_bounces") }}'
+      - name: most_recent_bounce
+        description: '{{ doc("most_recent_bounce") }}'
+      - name: number_of_forwards
+        description: '{{ doc("number_of_forwards") }}'
+      - name: most_recent_forward
+        description: '{{ doc("most_recent_forward") }}'
+      - name: number_of_survey_responses
+        description: '{{ doc("number_of_survey_responses") }}'
+      - name: most_recent_survey_response
+        description: '{{ doc("most_recent_survey_response") }}'

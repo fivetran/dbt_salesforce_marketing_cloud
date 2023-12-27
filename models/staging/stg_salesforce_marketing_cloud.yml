@@ -2,7 +2,13 @@ version: 2
 
 models:
   - name: stg_salesforce_marketing_cloud__email
-    description: '{{ doc("stg_salesforce_marketing_cloud__email") }}'
+    description: '{{ doc("email") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - email_id
+            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -36,7 +42,12 @@ models:
         description: '{{ doc("asset_id") }}'
 
   - name: stg_salesforce_marketing_cloud__event
-    description: '{{ doc("stg_salesforce_marketing_cloud__event") }}'
+    description: '{{ doc("event") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - event_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -80,7 +91,12 @@ models:
         description: '{{ doc("url") }}'
 
   - name: stg_salesforce_marketing_cloud__link
-    description: '{{ doc("stg_salesforce_marketing_cloud__link") }}'
+    description: '{{ doc("link") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - link_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -106,7 +122,13 @@ models:
         description: '{{ doc("_fivetran_synced") }}'
 
   - name: stg_salesforce_marketing_cloud__link_send
-    description: '{{ doc("stg_salesforce_marketing_cloud__link_send") }}'
+    description: '{{ doc("link_send") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - link_id
+            - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -120,7 +142,13 @@ models:
         description: '{{ doc("send_id") }}'
 
   - name: stg_salesforce_marketing_cloud__list
-    description: '{{ doc("stg_salesforce_marketing_cloud__list") }}'
+    description: '{{ doc("list") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - list_id
+            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -146,7 +174,12 @@ models:
         description: '{{ doc("list_type") }}'
 
   - name: stg_salesforce_marketing_cloud__send
-    description: '{{ doc("stg_salesforce_marketing_cloud__send") }}'
+    description: '{{ doc("send") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -218,7 +251,12 @@ models:
         description: '{{ doc("unsubscribes") }}'
 
   - name: stg_salesforce_marketing_cloud__subscriber
-    description: '{{ doc("stg_salesforce_marketing_cloud__subscriber") }}'
+    description: '{{ doc("subscriber") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -242,7 +280,14 @@ models:
         description: '{{ doc("unsubscribed_date") }}'
 
   - name: stg_salesforce_marketing_cloud__list_subscriber
-    description: '{{ doc("stg_salesforce_marketing_cloud__list_subscriber") }}'
+    description: '{{ doc("list_subscriber") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - list_subscriber_id
+            - list_id
+            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
