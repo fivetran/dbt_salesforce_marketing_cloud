@@ -259,8 +259,6 @@ sources:
         identifier: '{{ var("salesforce_marketing_cloud_triggered_send_identifier", "send") }}'
         description: '{{ doc("triggered_send") }}'
         columns:
-        - name: source_relation
-          description: '{{ doc("source_relation") }}'
         - name: id
           description: '{{ doc("triggered_send_id") }}'
         - name: _fivetran_deleted
