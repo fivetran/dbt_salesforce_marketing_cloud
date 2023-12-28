@@ -48,6 +48,7 @@ with events as(
     sends.from_name,
     sends.preview_url,
     sends.subject as sends_subject,
+    sends.email_id,
     emails.email_name,
     emails.subject as email_subject,
     emails.created_date as email_created_date
