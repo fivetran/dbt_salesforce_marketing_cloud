@@ -25,7 +25,7 @@ with subscribers as (
     subscribers.subscriber_status, 
     subscribers.created_date, 
     subscribers.unsubscribed_date,
-    lists.list_id, 
+    lists_subscribers.list_id, 
     lists.list_description, 
     lists.list_name, 
     lists.list_type, 
