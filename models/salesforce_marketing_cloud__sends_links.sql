@@ -48,7 +48,7 @@ with sends as (
     sends.created_date as send_created_date,
     sends.modified_date as send_modified_date,
     sends.send_date,
-    links.link_id,
+    link_sends.link_id,
     links.link_alias,
     links.link_total_clicks,
     links.link_unique_clicks,
