@@ -1,10 +1,10 @@
-{{
+{{ 
     config(
         materialized='incremental',
         unique_key='event_id',
         partition_by={'field': 'event_date', 'data_type': 'date'} if target.type not in ('spark','databricks') else ['event_date'],
         cluster_by=['event_date'],
-        incremental_strategy = 'merge' if target.type not in ('postgres', 'redshift') else 'delete+insert',
+        incremental_strategy = 'merge' if target.type not in ('postgres', 'redshift') else 'delete+insert', 
         file_format = 'delta' 
     )
 }}

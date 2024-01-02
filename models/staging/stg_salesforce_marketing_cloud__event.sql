@@ -26,7 +26,7 @@ final as (
     
     select 
         source_relation, 
-        _fivetran_deleted,
+        _fivetran_deleted, 
         _fivetran_synced,
         batch_id,
         bounce_category,

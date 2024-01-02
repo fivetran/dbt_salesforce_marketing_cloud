@@ -7,7 +7,7 @@ with emails as (
 ), sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
+  where not _fivetran_deleted 
 
 ), sends_stats as (
   select 
