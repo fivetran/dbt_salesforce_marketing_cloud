@@ -9,13 +9,14 @@ models:
     +materialized: table
     intermediate:
       +materialized: ephemeral
-      +schema: int_sfmc  
+      +schema: int_sfmc 
     staging:
       +materialized: view
       +schema: stg_sfmc
 
 
 vars:
+  salesforce_marketing_cloud:
     email: "{{ source('salesforce_marketing_cloud','email') }}"
     event: "{{ source('salesforce_marketing_cloud','event') }}"
     link: "{{ source('salesforce_marketing_cloud','link') }}"

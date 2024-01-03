@@ -35,7 +35,7 @@ with sends as (
 
 ), joined as (
   select
-    sends_aggs.*,
+    sends_aggs.*, 
     events_stats.total_send_events,
     events_stats.total_open_events,
     events_stats.total_click_events,

@@ -62,7 +62,7 @@ with emails as (
 
 ), joined as (
   select
-    emails.*,
+    emails.*, 
     sends_aggs.total_unique_sends,
     sends_aggs.total_emails_sent,
     sends_aggs.total_unique_opens,
