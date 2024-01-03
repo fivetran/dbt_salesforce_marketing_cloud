@@ -1,4 +1,4 @@
--- this is meant to be stand alone since subscribers could belong to multiple lists, and I did not want to do a list agg to include this in the subscriber overview, but open for discussion
+-- this is meant to be stand alone since subscribers could belong to multiple lists, and I did not want to do a list agg to include this in the subscriber overview, but open for discussion 
 with subscribers as ( 
   select 
     *,

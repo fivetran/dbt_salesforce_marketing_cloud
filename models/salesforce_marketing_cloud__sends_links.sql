@@ -4,15 +4,15 @@
 with sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
+  where not _fivetran_deleted 
 
 ), link_sends as (
   select *
-  from {{ ref('stg_salesforce_marketing_cloud__link_send') }}
+  from {{ ref('stg_salesforce_marketing_cloud__link_send') }} 
 
 ), links as (
   select *
-  from {{ ref('stg_salesforce_marketing_cloud__link') }}
+  from {{ ref('stg_salesforce_marketing_cloud__link') }} 
 
 ), joined as (
   select 

@@ -18,7 +18,7 @@ This package models Salesforce Marketing Cloud data from [Fivetran's connector](
 
 The main focus of the package is to transform the core object tables into analytics-ready models:
 <!--section="salesforce_marketing_cloud_model"-->
-  - Materializes [Salesforce Marketing Cloud staging tables](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/salesforce_marketing_cloud_source/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/salesforce_marketing_cloud/#schemainformation). The staging tables clean, test, and prepare your Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/applications/salesforce_marketing_cloud_source) for analysis by doing the following:
+  - Materializes [Salesforce Marketing Cloud staging tables](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/salesforce_marketing_cloud_source/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/salesforce_marketing_cloud/#schemainformation). The staging tables clean, test, and prepare your Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/applications/salesforce_marketing_cloud) for analysis by doing the following:
   - Primary keys are renamed from `id` to `<table name>_id`. 
   - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
   - Provides insight into your Salesforce Marketing Cloud data across the following grains:
@@ -28,15 +28,15 @@ The main focus of the package is to transform the core object tables into analyt
 <!--section="salesforce_marketing_cloud_model"-->
 The following table provides a detailed list of all models materialized within this package by default. 
 > [!TIP]
-> See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/qualtrics).
+> See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview).
 
 | **model** | **description**|
 | --------- | -------------- |
-| [salesforce_marketing_cloud__email_overview]() | Each record represents an email with aggregated send and event data for each. |
-| [salesforce_marketing_cloud__sends_links]() | Each record represents a link and the corresponding send(s). |
-| [salesforce_marketing_cloud__sends_overview]() | Each record represents a send with aggregated event data for each. |
-| [salesforce_marketing_cloud__subscriber_lists]() | Each record represents a list and the corresponding subscriber(s). |
-| [salesforce_marketing_cloud__subscriber_overview]() | Each record represents a subscriber with aggregated event data for each. |
+| [salesforce_marketing_cloud__email_overview]() | Each record represents an email with aggregated send and event data for each. | 
+| [salesforce_marketing_cloud__sends_links]() | Each record represents a link and the corresponding send(s). | 
+| [salesforce_marketing_cloud__sends_overview]() | Each record represents a send with aggregated event data for each. | 
+| [salesforce_marketing_cloud__subscriber_lists]() | Each record represents a list and the corresponding subscriber(s). | 
+| [salesforce_marketing_cloud__subscriber_overview]() | Each record represents a subscriber with aggregated event data for each. | 
 <!--section-end-->
 
 # 🎯 How do I use the dbt package?

@@ -7,7 +7,7 @@ with emails as (
 ), sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
+  where not _fivetran_deleted 
 
 ), sends_stats as (
   select 
@@ -31,9 +31,9 @@ with emails as (
 ), sends_aggs as (
   select
     sends_stats.*,
-    coalesce(total_unique_opens / nullif(total_emails_sent, 0), 0) as open_rate, --use safe divide in dbt
-    coalesce(total_unique_clicks / nullif(total_emails_sent, 0), 0) as click_through_rate, --use safe divide in dbt
-    coalesce(total_unsubscribes / nullif(total_emails_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt
+    coalesce(total_unique_opens / nullif(total_emails_sent, 0), 0) as open_rate, --use safe divide in dbt 
+    coalesce(total_unique_clicks / nullif(total_emails_sent, 0), 0) as click_through_rate, --use safe divide in dbt 
+    coalesce(total_unsubscribes / nullif(total_emails_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt 
   from sends_stats
 
 ), events_enhanced as ( 
@@ -62,7 +62,7 @@ with emails as (
 
 ), joined as (
   select
-    emails.*,
+    emails.*, 
     sends_aggs.total_unique_sends,
     sends_aggs.total_emails_sent,
     sends_aggs.total_unique_opens,
@@ -72,8 +72,8 @@ with emails as (
     sends_aggs.total_deliveries,
     sends_aggs.total_targets,
     sends_aggs.total_bounces,
-    sends_aggs.open_rate, --use safe divide in dbt
-    sends_aggs.click_through_rate, --use safe divide in dbt
+    sends_aggs.open_rate, --use safe divide in dbt 
+    sends_aggs.click_through_rate, --use safe divide in dbt 
     sends_aggs.unsubscribe_rate,
     events_stats.total_send_events,
     events_stats.total_open_events,

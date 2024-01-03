@@ -26,9 +26,9 @@ final as (
     
     select 
         source_relation, 
-        _fivetran_start,
-        _fivetran_end,
-        _fivetran_active,
+        _fivetran_start, 
+        _fivetran_end, 
+        _fivetran_active, 
         _fivetran_synced,
         asset_id,
         asset_type_id,
