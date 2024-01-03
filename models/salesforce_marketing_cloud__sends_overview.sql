@@ -7,9 +7,9 @@ with sends as (
 ), sends_aggs as (
   select
     sends.*,
-    coalesce(unique_opens / nullif(number_sent, 0), 0) as open_rate, --use safe divide in dbt
-    coalesce(unique_clicks / nullif(number_sent, 0), 0) as click_through_rate, --use safe divide in dbt
-    coalesce(unsubscribes / nullif(number_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt
+    coalesce(unique_opens / nullif(number_sent, 0), 0) as open_rate, --use safe divide in dbt 
+    coalesce(unique_clicks / nullif(number_sent, 0), 0) as click_through_rate, --use safe divide in dbt 
+    coalesce(unsubscribes / nullif(number_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt 
   from sends
 
 ), events_enhanced as ( 

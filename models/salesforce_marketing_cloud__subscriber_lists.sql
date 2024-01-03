@@ -10,7 +10,7 @@ with subscribers as (
   from {{ ref('stg_salesforce_marketing_cloud__list_subscriber') }}
   where coalesce(_fivetran_active, true)
 
-), lists as ( --make lists optional
+), lists as ( --make lists optional 
   select *
   from {{ ref('stg_salesforce_marketing_cloud__list') }}
   where coalesce(_fivetran_active, true)
