@@ -26,11 +26,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_start,
-        _fivetran_end,
-        _fivetran_active,
-        _fivetran_synced,
+        source_relation,
         created_date,
         description as list_description,
         cast(id as {{ dbt.type_string() }}) as list_id,
@@ -38,6 +34,7 @@ final as (
         name as list_name,
         type as list_type
     from fields
+    where coalesce(_fivetran_active, true)
 )
 
 select *

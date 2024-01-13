@@ -8,20 +8,11 @@ models:
           combination_of_columns:
             - source_relation
             - email_id
-            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
-      - name: _fivetran_active
-        description: '{{ doc("_fivetran_active") }}'
-      - name: _fivetran_start
-        description: '{{ doc("_fivetran_start") }}'
-      - name: _fivetran_end
-        description: '{{ doc("_fivetran_end") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: character_set
         description: '{{ doc("character_set") }}'
       - name: created_date
@@ -55,10 +46,6 @@ models:
         description: '{{ doc("event_type") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: batch_id
         description: '{{ doc("batch_id") }}'
       - name: bounce_category
@@ -100,10 +87,6 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
       - name: link_alias
@@ -132,10 +115,6 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
       - name: send_id
@@ -148,20 +127,11 @@ models:
           combination_of_columns:
             - source_relation
             - list_id
-            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: list_id
         description: '{{ doc("list_id") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
-      - name: _fivetran_active
-        description: '{{ doc("_fivetran_active") }}'
-      - name: _fivetran_start
-        description: '{{ doc("_fivetran_start") }}'
-      - name: _fivetran_end
-        description: '{{ doc("_fivetran_end") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: list_description
@@ -185,10 +155,6 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
       - name: created_date
@@ -262,10 +228,6 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: email_address
@@ -287,20 +249,11 @@ models:
             - source_relation
             - list_subscriber_id
             - list_id
-            - _fivetran_start
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: list_subscriber_id
         description: '{{ doc("list_subscriber_id") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
-      - name: _fivetran_active
-        description: '{{ doc("_fivetran_active") }}'
-      - name: _fivetran_start
-        description: '{{ doc("_fivetran_start") }}'
-      - name: _fivetran_end
-        description: '{{ doc("_fivetran_end") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: list_id
@@ -324,10 +277,6 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: triggered_send_id
         description: '{{ doc("triggered_send_id") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: auto_add_subscribers
         description: '{{ doc("auto_add_subscribers") }}'
       - name: auto_update_subscribers

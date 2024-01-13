@@ -4,7 +4,6 @@
 with sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
 
 ), link_sends as (
   select *

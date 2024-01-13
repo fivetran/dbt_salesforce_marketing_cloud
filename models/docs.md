@@ -76,7 +76,27 @@
 
 {% docs is_always_on %} Indicates whether the request can be performed while the system is is maintenance mode. A value of true indicates that the system processes the request. {% enddocs %}
 
+{% docs is_bounce %} Indicates if the `event_type` is one of (`hardbounce`, `otherbounce`, `softbounce`). {% enddocs %}
+
+{% docs is_click %} Indicates if the `event_type` = `click`. {% enddocs %}
+
+{% docs is_delivered_event %} Indicates if the `event_type` = `deliveredevent`. {% enddocs %}
+
+{% docs is_forward %} Indicates if the `event_type` = `forwardedemail`. {% enddocs %}
+
 {% docs is_multipart %} Indicates whether the email is sent with Multipart/MIME enabled. {% enddocs %}
+
+{% docs is_not_sent %} Indicates if the `event_type` = `notsent`. {% enddocs %}
+
+{% docs is_open %} Indicates if the `event_type` = `forwardedemail`. {% enddocs %}
+
+{% docs is_opt_in %} Indicates if the `event_type` = `forwardedemailoptin`. {% enddocs %}
+
+{% docs is_sent %} Indicates if the `event_type` = `sent`. {% enddocs %}
+
+{% docs is_survey_response %} Indicates if the `event_type` = `survey`. {% enddocs %}
+
+{% docs is_unsubscribe %} Indicates if the `event_type` = `unsubscribe`. {% enddocs %}
 
 {% docs is_wrapped %} Indicates whether an email send contains the links necessary to process tracking information for clicks. {% enddocs %}
 

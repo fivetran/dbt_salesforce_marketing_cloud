@@ -27,10 +27,6 @@ final as (
     
     select 
         source_relation,
-        _fivetran_start,
-        _fivetran_end,
-        _fivetran_active,
-        _fivetran_synced,
         created_date,
         cast(id as {{ dbt.type_string() }}) as list_subscriber_id,
         cast(list_id as {{ dbt.type_string() }}) as list_id,
@@ -38,6 +34,7 @@ final as (
         status,
         subscriber_key
     from fields
+    where coalesce(_fivetran_active, true)
 )
 
 select *

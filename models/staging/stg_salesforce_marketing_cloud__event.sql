@@ -1,4 +1,3 @@
-
 with base as (
 
     select 
@@ -25,9 +24,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_deleted,
-        _fivetran_synced,
+        source_relation,
         batch_id,
         bounce_category,
         bounce_type,
@@ -46,6 +43,7 @@ final as (
         unsubscribed_list_id,
         url as event_url
     from fields
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *

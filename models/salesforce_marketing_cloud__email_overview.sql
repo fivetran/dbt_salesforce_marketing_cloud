@@ -2,12 +2,10 @@
 with emails as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__email') }}
-  where coalesce(_fivetran_active, true)
 
 ), sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
 
 ), sends_stats as (
   select 
@@ -31,9 +29,9 @@ with emails as (
 ), sends_aggs as (
   select
     sends_stats.*,
-    coalesce(total_unique_opens / nullif(total_emails_sent, 0), 0) as open_rate, --use safe divide in dbt
-    coalesce(total_unique_clicks / nullif(total_emails_sent, 0), 0) as click_through_rate, --use safe divide in dbt
-    coalesce(total_unsubscribes / nullif(total_emails_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt
+    coalesce({{ dbt_utils.safe_divide('total_unique_opens', 'total_emails_sent') }}, 0) as open_rate,
+    coalesce({{ dbt_utils.safe_divide('total_unique_clicks', 'total_emails_sent') }}, 0) as click_through_rate,
+    coalesce({{ dbt_utils.safe_divide('total_unsubscribes', 'total_emails_sent') }}, 0) as unsubscribe_rate
   from sends_stats
 
 ), events_enhanced as ( 
@@ -62,7 +60,17 @@ with emails as (
 
 ), joined as (
   select
-    emails.*,
+    emails.source_relation,
+    emails.asset_id,
+    emails.asset_type_id,
+    emails.character_set,
+    emails.created_date,
+    emails.email_id,
+    emails.modified_date,
+    emails.email_name,
+    emails.pre_header,
+    emails.subject,
+    emails.text_body,
     sends_aggs.total_unique_sends,
     sends_aggs.total_emails_sent,
     sends_aggs.total_unique_opens,

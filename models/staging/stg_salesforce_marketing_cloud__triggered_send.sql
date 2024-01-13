@@ -1,4 +1,3 @@
-
 with base as (
 
     select
@@ -25,9 +24,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_deleted,
-        _fivetran_synced,
+        source_relation,
         id as triggered_send_id,
         email_id,
         list_id,
@@ -50,6 +47,7 @@ final as (
         send_window_open,
         triggered_send_status
     from fields
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *

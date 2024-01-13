@@ -9,7 +9,6 @@ models:
     +materialized: table
     intermediate:
       +materialized: ephemeral
-      +schema: int_sfmc
     staging:
       +materialized: view
       +schema: stg_sfmc

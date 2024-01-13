@@ -34,10 +34,9 @@ final as (
         modified_date,
         total_clicks as link_total_clicks,
         unique_clicks as link_unique_clicks,
-        url as link_url,
-        _fivetran_synced,
-        _fivetran_deleted
+        url as link_url
     from fields
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *

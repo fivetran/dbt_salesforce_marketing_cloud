@@ -12,14 +12,6 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: _fivetran_start
-        description: '{{ doc("_fivetran_start") }}'
-      - name: _fivetran_end
-        description: '{{ doc("_fivetran_end") }}'
-      - name: _fivetran_active
-        description: '{{ doc("_fivetran_active") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: asset_id
         description: '{{ doc("asset_id") }}'
       - name: asset_type_id
@@ -78,6 +70,91 @@ models:
         description: '{{ doc("total_unsubscribe_events") }}'
       - name: total_survey_response_events
         description: '{{ doc("total_survey_response_events") }}'
+
+  - name: salesforce_marketing_cloud__events_enhanced
+    description: Each record represents an event with pivoted event type data.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - event_id
+    columns:
+      - name: source_relation
+        description: '{{ doc("source_relation") }}'
+      - name: event_type
+        description: '{{ doc("event_type") }}'
+      - name: event_id
+        description: '{{ doc("event_id") }}'
+      - name: batch_id
+        description: '{{ doc("batch_id") }}'
+      - name: bounce_category
+        description: '{{ doc("bounce_category") }}'
+      - name: bounce_type
+        description: '{{ doc("bounce_type") }}'
+      - name: created_date
+        description: '{{ doc("created_date") }}'
+      - name: event_date
+        description: '{{ doc("event_date") }}'
+      - name: modified_date
+        description: '{{ doc("modified_date") }}'
+      - name: opt_in_subscriber_key
+        description: '{{ doc("opt_in_subscriber_key") }}'
+      - name: question
+        description: '{{ doc("question") }}'
+      - name: send_id
+        description: '{{ doc("send_id") }}'
+      - name: smtp_code
+        description: '{{ doc("smtp_code") }}'
+      - name: smtp_reason
+        description: '{{ doc("smtp_reason") }}'
+      - name: subscriber_key
+        description: '{{ doc("subscriber_key") }}'
+      - name: triggered_send_id
+        description: '{{ doc("triggered_send_id") }}'
+      - name: unsubscribed_list_id
+        description: '{{ doc("unsubscribed_list_id") }}'
+      - name: event_url
+        description: '{{ doc("url") }}'
+      - name: send_created_date
+        description: '{{ doc("created_date") }}'
+      - name: bcc_email
+        description: '{{ doc("bcc_email") }}'
+      - name: from_address
+        description: '{{ doc("from_address") }}'
+      - name: from_name
+        description: '{{ doc("from_name") }}'
+      - name: preview_url
+        description: '{{ doc("preview_url") }}'
+      - name: sends_subject
+        description: '{{ doc("subject") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+      - name: email_name
+        description: '{{ doc("email_name") }}'
+      - name: email_subject
+        description: '{{ doc("subject") }}'
+      - name: email_created_date
+        description: '{{ doc("created_date") }}'
+      - name: is_click
+        description: '{{ doc("is_click") }}'
+      - name: is_delivered_event
+        description: '{{ doc("is_delivered_event") }}'
+      - name: is_forward
+        description: '{{ doc("is_forward") }}'
+      - name: is_opt_in
+        description: '{{ doc("is_opt_in") }}'
+      - name: is_bounce
+        description: '{{ doc("is_bounce") }}'
+      - name: is_open
+        description: '{{ doc("is_open") }}'
+      - name: is_not_sent
+        description: '{{ doc("is_not_sent") }}'
+      - name: is_sent
+        description: '{{ doc("is_sent") }}'
+      - name: is_survey_response
+        description: '{{ doc("is_survey_response") }}'
+      - name: is_unsubscribe
+        description: '{{ doc("is_unsubscribe") }}'
 
   - name: salesforce_marketing_cloud__sends_links
     description: Each record represents a link and the corresponding send(s).
@@ -175,10 +252,6 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: _fivetran_deleted
-        description: '{{ doc("_fivetran_deleted") }}'
-      - name: _fivetran_synced
-        description: '{{ doc("_fivetran_synced") }}'
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
       - name: created_date

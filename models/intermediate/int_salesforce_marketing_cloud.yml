@@ -2,8 +2,5 @@ version: 2
 
 models:
 
-  - name: salesforce_marketing_cloud__events_enhanced
-    description: Each record represents an event with pivoted event type data.
-
   - name: salesforce_marketing_cloud__subscribers_enhanced
     description: Each record represents a subscriber with pivoted subscriber status data.

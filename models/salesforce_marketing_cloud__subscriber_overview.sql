@@ -18,10 +18,6 @@ with subscribers as (
       subscribers.subscriber_status,
       subscribers.is_active,
       subscribers.unsubscribed_date,
-      {# case
-        when unsubscribed_date is not null then datediff('day', created_date, unsubscribed_date)
-        else datediff('day', created_date, current_date())
-        end as days_subscribed, #}
       case when subscribers.unsubscribed_date is not null 
         then {{ dbt.datediff("subscribers.created_date", "subscribers.unsubscribed_date", "day") }} 
         else {{ dbt.datediff("subscribers.created_date", "current_date", "day") }} 

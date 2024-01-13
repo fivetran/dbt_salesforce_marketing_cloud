@@ -1,4 +1,3 @@
-
 with base as (
 
     select
@@ -25,11 +24,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_start,
-        _fivetran_end,
-        _fivetran_active,
-        _fivetran_synced,
+        source_relation,
         asset_id,
         asset_type_id,
         character_set,
@@ -41,6 +36,7 @@ final as (
         subject,
         text_body
     from fields
+    where coalesce(_fivetran_active, true)
 )
 
 select *

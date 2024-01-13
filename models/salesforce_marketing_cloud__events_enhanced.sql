@@ -1,11 +1,15 @@
 {{
-    config(
-        materialized='incremental',
-        unique_key='event_id',
-        partition_by={'field': 'event_date', 'data_type': 'date'} if target.type not in ('spark','databricks') else ['event_date'],
-        cluster_by=['event_date'],
-        incremental_strategy = 'merge' if target.type not in ('postgres', 'redshift') else 'delete+insert',
-        file_format = 'delta' 
+  config(
+    materialized='incremental',
+    unique_key='event_id',
+    partition_by={
+      'field': 'event_date', 
+      'data_type': 'date',
+      'granularity': 'day'
+      } if target.type not in ('spark','databricks') else ['event_date'],
+    cluster_by=['event_date'],
+    incremental_strategy='insert_overwrite' if target.type in ('bigquery', 'spark', 'databricks') else 'delete+insert',
+    file_format='parquet'
     )
 }}
 
@@ -25,10 +29,13 @@ with events as(
     lower(event_type) = 'survey' as is_survey_response,
     lower(event_type) = 'unsubscribe' as is_unsubscribe
   from {{ ref('stg_salesforce_marketing_cloud__event') }}
-  where not _fivetran_deleted
 
   {% if is_incremental() %}
-  and event_date >= coalesce((select max(event_date) from {{ this }}), '1900-01-01')
+      {%- call statement('max_event_date', fetch_result=True) -%}
+        select cast(max(event_date) as date) from {{ this }}
+      {%- endcall -%}
+      {%- set max_event_date = load_result('max_event_date')['data'][0][0] -%}
+    where cast(event_date as date) > cast(coalesce('{{ max_event_date }}', '1900-01-01') as date)
   {% endif %}
 
 ), sends as (

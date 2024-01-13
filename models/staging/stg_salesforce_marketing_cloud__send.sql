@@ -1,4 +1,3 @@
-
 with base as (
 
     select
@@ -25,9 +24,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_deleted,
-        _fivetran_synced,
+        source_relation,
         bcc_email,
         created_date,
         duplicates,
@@ -60,6 +57,7 @@ final as (
         unique_opens,
         unsubscribes
     from fields
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *

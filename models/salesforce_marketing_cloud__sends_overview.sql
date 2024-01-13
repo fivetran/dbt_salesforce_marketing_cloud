@@ -2,14 +2,13 @@
 with sends as (
   select *
   from {{ ref('stg_salesforce_marketing_cloud__send') }}
-  where not _fivetran_deleted
 
 ), sends_aggs as (
   select
     sends.*,
-    coalesce(unique_opens / nullif(number_sent, 0), 0) as open_rate, --use safe divide in dbt
-    coalesce(unique_clicks / nullif(number_sent, 0), 0) as click_through_rate, --use safe divide in dbt
-    coalesce(unsubscribes / nullif(number_sent, 0), 0) as unsubscribe_rate --use safe divide in dbt
+    coalesce({{ dbt_utils.safe_divide('unique_opens', 'number_sent') }}, 0) as open_rate,
+    coalesce({{ dbt_utils.safe_divide('unique_clicks', 'number_sent') }}, 0) as click_through_rate,
+    coalesce({{ dbt_utils.safe_divide('unsubscribes', 'number_sent') }}, 0) as unsubscribe_rate
   from sends
 
 ), events_enhanced as ( 
@@ -35,7 +34,41 @@ with sends as (
 
 ), joined as (
   select
-    sends_aggs.*,
+    sends_aggs.source_relation,
+    sends_aggs.bcc_email,
+    sends_aggs.created_date,
+    sends_aggs.duplicates,
+    sends_aggs.email_id,
+    sends_aggs.email_name,
+    sends_aggs.existing_undeliverables,
+    sends_aggs.existing_unsubscribes,
+    sends_aggs.forwarded_emails,
+    sends_aggs.from_address,
+    sends_aggs.from_name,
+    sends_aggs.hard_bounces,
+    sends_aggs.send_id,
+    sends_aggs.invalid_addresses,
+    sends_aggs.is_always_on,
+    sends_aggs.is_multipart,
+    sends_aggs.missing_addresses,
+    sends_aggs.modified_date,
+    sends_aggs.number_delivered,
+    sends_aggs.number_errored,
+    sends_aggs.number_excluded,
+    sends_aggs.number_sent,
+    sends_aggs.number_targeted,
+    sends_aggs.other_bounces,
+    sends_aggs.preview_url,
+    sends_aggs.send_date,
+    sends_aggs.soft_bounces,
+    sends_aggs.send_status,
+    sends_aggs.subject,
+    sends_aggs.unique_clicks,
+    sends_aggs.unique_opens,
+    sends_aggs.unsubscribes,
+    sends_aggs.open_rate,
+    sends_aggs.click_through_rate,
+    sends_aggs.unsubscribe_rate,
     events_stats.total_send_events,
     events_stats.total_open_events,
     events_stats.total_click_events,

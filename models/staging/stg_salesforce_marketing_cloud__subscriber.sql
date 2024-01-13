@@ -1,4 +1,3 @@
-
 with base as (
 
     select
@@ -25,9 +24,7 @@ fields as (
 final as (
     
     select 
-        source_relation, 
-        _fivetran_deleted,
-        _fivetran_synced,
+        source_relation,
         cast(created_date as {{ dbt.type_timestamp() }}) as created_date,
         email_address,
         email_type_preference,
@@ -36,6 +33,7 @@ final as (
         subscriber_key,
         cast(unsubscribed_date as {{ dbt.type_timestamp() }}) as unsubscribed_date
     from fields
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *
