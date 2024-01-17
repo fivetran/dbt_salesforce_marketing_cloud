@@ -80,8 +80,8 @@ with emails as (
     sends_aggs.total_deliveries,
     sends_aggs.total_targets,
     sends_aggs.total_bounces,
-    sends_aggs.open_rate, --use safe divide in dbt
-    sends_aggs.click_through_rate, --use safe divide in dbt
+    sends_aggs.open_rate,
+    sends_aggs.click_through_rate,
     sends_aggs.unsubscribe_rate,
     events_stats.total_send_events,
     events_stats.total_open_events,

@@ -1,6 +1,6 @@
 {{ config(enabled=var('salesforce_marketing_cloud__list_enabled', true)) }}
 
--- this is meant to be stand alone since subscribers could belong to multiple lists, and I did not want to do a list agg to include this in the subscriber overview, but open for discussion
+-- subscribers joined with lists.
 with subscribers as ( 
   select *
   from {{ ref('salesforce_marketing_cloud__subscribers_enhanced') }}
