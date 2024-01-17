@@ -12,6 +12,10 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
+      - name: email_id
+        description: '{{ doc("email_id") }}'
+        tests:
+          - not_null
       - name: asset_id
         description: '{{ doc("asset_id") }}'
       - name: asset_type_id
@@ -20,8 +24,6 @@ models:
         description: '{{ doc("character_set") }}'
       - name: created_date
         description: '{{ doc("created_date") }}'
-      - name: email_id
-        description: '{{ doc("email_id") }}'
       - name: modified_date
         description: '{{ doc("modified_date") }}'
       - name: email_name
@@ -81,10 +83,12 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: event_type
-        description: '{{ doc("event_type") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
+        tests:
+          - not_null
+      - name: event_type
+        description: '{{ doc("event_type") }}'
       - name: batch_id
         description: '{{ doc("batch_id") }}'
       - name: bounce_category
@@ -169,6 +173,12 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
+        tests:
+          - not_null
+      - name: link_id
+        description: '{{ doc("link_id") }}'
+        tests:
+          - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
       - name: duplicates
@@ -229,8 +239,6 @@ models:
         description: '{{ doc("modified_date") }}'
       - name: send_date
         description: '{{ doc("send_date") }}'
-      - name: link_id
-        description: '{{ doc("link_id") }}'
       - name: link_alias
         description: '{{ doc("alias") }}'
       - name: link_total_clicks
@@ -252,6 +260,10 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
+      - name: send_id
+        description: '{{ doc("send_id") }}'
+        tests:
+          - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
       - name: created_date
@@ -274,8 +286,6 @@ models:
         description: '{{ doc("from_name") }}'
       - name: hard_bounces
         description: '{{ doc("hard_bounces") }}'
-      - name: send_id
-        description: '{{ doc("send_id") }}'
       - name: invalid_addresses
         description: '{{ doc("invalid_addresses") }}'
       - name: is_always_on
@@ -346,10 +356,14 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: source_relation
-        description: '{{ doc("source_relation") }}'
+      - name: list_id
+        description: '{{ doc("list_id") }}'
+        tests:
+          - not_null
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
+        tests:
+          - not_null
       - name: email_address
         description: '{{ doc("email_address") }}'
       - name: email_type_preference
@@ -362,8 +376,6 @@ models:
         description: '{{ doc("created_date") }}'
       - name: unsubscribed_date
         description: '{{ doc("unsubscribed_date") }}'
-      - name: list_id
-        description: '{{ doc("list_id") }}'
       - name: list_description
         description: '{{ doc("description") }}'
       - name: list_name
@@ -387,6 +399,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
+        tests:
+          - not_null
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
       - name: created_date

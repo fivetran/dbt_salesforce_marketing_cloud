@@ -13,6 +13,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
+        tests:
+          - not_null
       - name: character_set
         description: '{{ doc("character_set") }}'
       - name: created_date
@@ -42,10 +44,12 @@ models:
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
-      - name: event_type
-        description: '{{ doc("event_type") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
+        tests:
+          - not_null
+      - name: event_type
+        description: '{{ doc("event_type") }}'
       - name: batch_id
         description: '{{ doc("batch_id") }}'
       - name: bounce_category
@@ -89,6 +93,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
+        tests:
+          - not_null
       - name: link_alias
         description: '{{ doc("alias") }}'
       - name: link_last_clicked
@@ -117,8 +123,12 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
+        tests:
+          - not_null
       - name: send_id
         description: '{{ doc("send_id") }}'
+        tests:
+          - not_null
 
   - name: stg_salesforce_marketing_cloud__list
     description: '{{ doc("list") }}'
@@ -132,6 +142,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: list_id
         description: '{{ doc("list_id") }}'
+        tests:
+          - not_null
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: list_description
@@ -155,6 +167,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
+        tests:
+          - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
       - name: created_date
@@ -228,6 +242,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
+        tests:
+          - not_null
       - name: created_date
         description: '{{ doc("created_date") }}'
       - name: email_address
@@ -254,10 +270,14 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: list_subscriber_id
         description: '{{ doc("list_subscriber_id") }}'
-      - name: created_date
-        description: '{{ doc("created_date") }}'
+        tests:
+          - not_null
       - name: list_id
         description: '{{ doc("list_id") }}'
+        tests:
+          - not_null
+      - name: created_date
+        description: '{{ doc("created_date") }}'
       - name: modified_date
         description: '{{ doc("modified_date") }}'
       - name: status
@@ -277,6 +297,8 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: triggered_send_id
         description: '{{ doc("triggered_send_id") }}'
+        tests:
+          - not_null
       - name: auto_add_subscribers
         description: '{{ doc("auto_add_subscribers") }}'
       - name: auto_update_subscribers
