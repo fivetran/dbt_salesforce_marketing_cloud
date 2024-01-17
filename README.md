@@ -32,11 +32,12 @@ The following table provides a detailed list of all models materialized within t
 
 | **model** | **description**|
 | --------- | -------------- |
-| [salesforce_marketing_cloud__email_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__email_overview) | Each record represents an email with aggregated send and event data for each. |
-| [salesforce_marketing_cloud__sends_links](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_links) | Each record represents a link and the corresponding send(s). |
-| [salesforce_marketing_cloud__sends_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_overview) | Each record represents a send with aggregated event data for each. |
-| [salesforce_marketing_cloud__subscriber_lists](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_lists) | Each record represents a list and the corresponding subscriber(s). |
-| [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Each record represents a subscriber with aggregated event data for each. |
+| [salesforce_marketing_cloud__email_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__email_overview) | Each record provides the performance of an email via `total_*` and `*_rate` metrics. |
+| [salesforce_marketing_cloud__events_enhanced](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__event_enhanced) | Each record expands the source events information by pivoting the `event_type` options into boolean fields. Each record also has related send and email information added. |
+| [salesforce_marketing_cloud__sends_links](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_links) | Each record provides a link, joined with all corresponding send(s). |
+| [salesforce_marketing_cloud__sends_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_overview) | Each record provides the performance of a send via `total_*` and `*_rate` metrics. |
+| [salesforce_marketing_cloud__subscriber_lists](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_lists) | Each record provides a list, joined with all corresponding subscriber(s). |
+| [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Each record provides an overview of metrics and activity for a subscriber. |
 <!--section-end-->
 
 # 🎯 How do I use the dbt package?

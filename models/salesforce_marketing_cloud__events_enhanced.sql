@@ -2,13 +2,9 @@
   config(
     materialized='incremental',
     unique_key='event_id',
-    partition_by={
-      'field': 'event_date', 
-      'data_type': 'date',
-      'granularity': 'day'
-      } if target.type not in ('spark','databricks') else ['event_date'],
-    cluster_by=['event_date'],
     incremental_strategy='insert_overwrite' if target.type in ('bigquery', 'spark', 'databricks') else 'delete+insert',
+    partition_by={'field': 'event_date', 'data_type': 'date',} if target.type not in ('spark','databricks') else ['event_date'],
+    cluster_by=['event_date'],
     file_format='parquet'
     )
 }}
@@ -21,7 +17,7 @@ with events as(
 
   {% if is_incremental() %}
     {% if target.type == 'bigquery' %}
-      cast(event_date as date) >= cast(_dbt_max_partition as date)
+      where date(event_date) >= date(_dbt_max_partition)
     {% else %}
       where event_date > (select max(event_date) from {{ this }})
     {% endif %}
