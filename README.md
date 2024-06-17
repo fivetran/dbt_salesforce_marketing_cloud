@@ -14,7 +14,7 @@
 
 # 📣 What does this dbt package do?
 
-This package models Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing_cloud). It uses data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud#schemainformation).
+This package models Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud). It uses data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud#schemainformation).
 
 The main focus of the package is to transform the core object tables into analytics-ready models:
 <!--section="salesforce_marketing_cloud_model"-->
