@@ -1,6 +1,6 @@
 # dbt_salesforce_marketing_cloud v0.2.0
 
-[PR #]() includes the following updates. Please be aware these changes only impact Databricks warehouse users:
+[PR #4](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/4) includes the following updates. Please be aware these changes only impact Databricks warehouse users:
 
 ## 🚨 Breaking Changes 🚨
 > ⚠️ Since the following changes result in the table format changing for Databricks users, we recommend running a `--full-refresh` after upgrading to this version to avoid possible incremental failures.
