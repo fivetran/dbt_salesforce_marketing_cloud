@@ -1,13 +1,11 @@
-{{
-  config(
-    materialized='incremental',
+{{ config(
+    materialized='incremental' if is_incremental_compatible(target) else 'table',
     unique_key='event_id',
-    incremental_strategy='insert_overwrite' if target.type in ('bigquery', 'spark', 'databricks') else 'delete+insert',
+    incremental_strategy='insert_overwrite' if target.type in ('bigquery','spark','databricks') else 'delete+insert',
     partition_by={'field': 'event_date', 'data_type': 'date',} if target.type not in ('spark','databricks') else ['event_date'],
-    cluster_by=['event_date'],
-    file_format='parquet'
-    )
-}}
+    cluster_by = ['event_date'],
+    file_format='delta'
+) }}
 
 -- events grain with sends and email information added.
 with events as( 
