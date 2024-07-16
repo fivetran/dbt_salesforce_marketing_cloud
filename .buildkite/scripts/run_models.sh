@@ -17,13 +17,13 @@ echo `pwd`
 cd integration_tests
 dbt deps
 if [ "$db" = "databricks-sql" ]; then
-dbt seed --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db" --full-refresh
-dbt run --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db" --full-refresh
-dbt test --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db"
-dbt run --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db"
-dbt test --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db"
-dbt run --vars '{fivetran_platform_schema: sqlw_tests, salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --full-refresh --target "$db"
-dbt test --vars '{fivetran_platform_schema: sqlw_tests}' --target "$db"
+dbt seed --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db" --full-refresh
+dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db" --full-refresh
+dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
+dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
+dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
+dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests, salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --full-refresh --target "$db"
+dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
 else
 dbt seed --target "$db" --full-refresh
 dbt run --target "$db" --full-refresh
