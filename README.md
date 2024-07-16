@@ -57,7 +57,7 @@ dispatch:
 ```
 
 ### Database Incremental Strategies 
-The `salesforce_marketing_cloud__events_enhanced` model in this package is materialized incrementally, this model is configured to work with the different strategies available to each supported warehouse.
+The `salesforce_marketing_cloud__events_enhanced` model in this package is materialized incrementally and is configured to work with the different strategies available to each supported warehouse.
 
 For **BigQuery** and **Databricks All Purpose Cluster runtime** destinations, we have chosen `insert_overwrite` as the default strategy, which benefits from the partitioning capability. 
 > For all other Databricks runtimes, models are materialized as tables without support for incremental runs.
