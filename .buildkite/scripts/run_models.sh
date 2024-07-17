@@ -23,6 +23,7 @@ dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target 
 dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
 dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
 dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests, salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --full-refresh --target "$db"
+dbt run --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests, salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --target "$db"
 dbt test --vars '{salesforce_marketing_cloud_schema: sfmc_sqlw_tests}' --target "$db"
 else
 dbt seed --target "$db" --full-refresh
@@ -31,6 +32,7 @@ dbt test --target "$db"
 dbt run --target "$db"
 dbt test --target "$db"
 dbt run --vars '{salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --full-refresh --target "$db"
+dbt run --vars '{salesforce_marketing_cloud__link_enabled: false, salesforce_marketing_cloud__list_enabled: false}' --target "$db"
 dbt test --target "$db"
 fi
 dbt run-operation fivetran_utils.drop_schemas_automation --target "$db"
