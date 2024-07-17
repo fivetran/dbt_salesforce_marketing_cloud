@@ -1,5 +1,5 @@
 name: 'salesforce_marketing_cloud_integration_tests'
-version: '0.1.0'
+version: '0.2.0'
 config-version: 2
 
 profile: 'integration_tests'
@@ -20,6 +20,10 @@ vars:
     salesforce_marketing_cloud_list_subscriber_identifier: "list_subscriber_data"
     salesforce_marketing_cloud_link_send_identifier: "link_send_data"
     salesforce_marketing_cloud_triggered_send_identifier: "triggered_send_data"
+
+models: 
+  +schema: "{{ 'sfmc_sqlw_tests' if target.name == 'databricks-sql' else 'salesforce_marketing_cloud' }}"
+  # +schema: "salesforce_marketing_cloud_{{ var('directed_schema','dev') }}" ## To be used for validation testing
 
 seeds:
   salesforce_marketing_cloud_integration_tests:

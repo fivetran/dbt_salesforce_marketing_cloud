@@ -56,6 +56,16 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
+### Database Incremental Strategies 
+The `salesforce_marketing_cloud__events_enhanced` model in this package is materialized incrementally and is configured to work with the different strategies available to each supported warehouse.
+
+For **BigQuery** and **Databricks All-Purpose Cluster runtime** destinations, we have chosen `insert_overwrite` as the default strategy, which benefits from the partitioning capability. 
+> For all other Databricks runtimes, models are materialized as tables without support for incremental runs.
+
+For **Snowflake**, **Redshift**, and **Postgres** databases, we have chosen `delete+insert` as the default strategy.  
+
+> Regardless of strategy, we recommend that users periodically run a `--full-refresh` to ensure a high level of data quality.
+
 ## Step 2: Install the package
 Include the following Salesforce Marketing Cloud package version in your `packages.yml` file:
 > [!TIP]
@@ -63,7 +73,7 @@ Include the following Salesforce Marketing Cloud package version in your `packag
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
-    version: [">=0.1.0", "<0.2.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.2.0", "<0.3.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 ## Step 3: Define database and schema variables
