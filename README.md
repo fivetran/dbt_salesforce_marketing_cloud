@@ -12,21 +12,21 @@
 
 # Salesforce Marketing Cloud dbt Package ([Docs](https://fivetran.github.io/dbt_salesforce_marketing_cloud/))
 
-# 📣 What does this dbt package do?
+## What does this dbt package do?
 
 This package models Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud). It uses data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud#schemainformation).
 
 The main focus of the package is to transform the core object tables into analytics-ready models:
 <!--section="salesforce_marketing_cloud_model"-->
-  - Materializes [Salesforce Marketing Cloud staging tables](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/salesforce_marketing_cloud/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud/#schemainformation). The staging tables clean, test, and prepare your Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud) for analysis by doing the following:
-  - Primary keys are renamed from `id` to `<table name>_id`. 
-  - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
-  - Provides insight into your Salesforce Marketing Cloud data across the following grains:
+- Materializes [Salesforce Marketing Cloud staging tables](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/salesforce_marketing_cloud/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud/#schemainformation). The staging tables clean, test, and prepare your Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud) for analysis by doing the following:
+- Primary keys are renamed from `id` to `<table name>_id`.
+- Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
+- Provides insight into your Salesforce Marketing Cloud data across the following grains:
     - Email, send, event, link, list, and subscriber
-  - Generates a comprehensive data dictionary of your Salesforce Marketing Cloud data through the [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/).
+- Generates a comprehensive data dictionary of your Salesforce Marketing Cloud data through the [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/).
 
 <!--section="salesforce_marketing_cloud_model"-->
-The following table provides a detailed list of all models materialized within this package by default. 
+The following table provides a detailed list of all models materialized within this package by default.
 > [!TIP]
 > See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview).
 
@@ -40,15 +40,15 @@ The following table provides a detailed list of all models materialized within t
 | [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Each record provides an overview of metrics and activity for a subscriber. |
 <!--section-end-->
 
-# 🎯 How do I use the dbt package?
+## How do I use the dbt package?
 
-## Step 1: Prerequisites
+### Step 1: Prerequisites
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Salesforce Marketing Cloud connector syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **Databricks**, or **PostgreSQL** destination.
 
-### Databricks dispatch configuration
+#### Databricks dispatch configuration
 If you are using a Databricks destination with this package, you must add the following (or a variation of the following) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
 ```yml
 dispatch:
@@ -56,17 +56,17 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
-### Database Incremental Strategies 
+#### Database Incremental Strategies
 The `salesforce_marketing_cloud__events_enhanced` model in this package is materialized incrementally and is configured to work with the different strategies available to each supported warehouse.
 
-For **BigQuery** and **Databricks All-Purpose Cluster runtime** destinations, we have chosen `insert_overwrite` as the default strategy, which benefits from the partitioning capability. 
+For **BigQuery** and **Databricks All-Purpose Cluster runtime** destinations, we have chosen `insert_overwrite` as the default strategy, which benefits from the partitioning capability.
 > For all other Databricks runtimes, models are materialized as tables without support for incremental runs.
 
-For **Snowflake**, **Redshift**, and **Postgres** databases, we have chosen `delete+insert` as the default strategy.  
+For **Snowflake**, **Redshift**, and **Postgres** databases, we have chosen `delete+insert` as the default strategy.
 
 > Regardless of strategy, we recommend that users periodically run a `--full-refresh` to ensure a high level of data quality.
 
-## Step 2: Install the package
+### Step 2: Install the package
 Include the following Salesforce Marketing Cloud package version in your `packages.yml` file:
 > [!TIP]
 > Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
@@ -76,8 +76,8 @@ packages:
     version: [">=0.2.0", "<0.3.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
-## Step 3: Define database and schema variables
-### Single connector
+### Step 3: Define database and schema variables
+#### Single connector
 By default, this package runs using your destination and the `salesforce_marketing_cloud` schema. If this is not where your Salesforce Marketing Cloud data is (for example, if your Salesforce Marketing Cloud schema is named `salesforce_marketing_cloud_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
@@ -85,7 +85,7 @@ vars:
     salesforce_marketing_cloud_database: your_database_name
     salesforce_marketing_cloud_schema: your_schema_name
 ```
-### Union multiple connectors
+#### Union multiple connectors
 If you have multiple Salesforce Marketing Cloud connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `salesforce_marketing_cloud_union_schemas` OR `salesforce_marketing_cloud_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
 ```yml
@@ -94,11 +94,11 @@ vars:
     salesforce_marketing_cloud_union_databases: ['sfmc_usa','sfmc_canada'] # use this if the data is in different databases/projects but uses the same schema name
 ```
 
-Please be aware that the native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
+> NOTE: The native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
-## Step 4: Enable/Disable Variables
+### Step 4: Enable/Disable Variables
 By default, this package brings in data from the Salesforce Marketing Cloud `link` and `list` source tables. However, if you have disabled syncing these sources, you will need to add the following configuration to your `dbt_project.yml`:
 
 ```yml
@@ -107,9 +107,9 @@ vars:
     salesforce_marketing_cloud__list_enabled: false # default = true
 ```
 
-## (Optional) Step 5: Additional configurations
+### (Optional) Step 5: Additional configurations
 
-### Changing the Build Schema
+#### Changing the Build Schema
 By default this package will build the Salesforce Marketing Cloud staging models within a schema titled (<target_schema> + `_stg_sfmc`) and the Salesforce Marketing Cloud final models within a schema titled (<target_schema> + `_sfmc`) in your target database. If this is not where you would like your modeled Salesforce Marketing Cloud data to be written, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
@@ -120,7 +120,7 @@ models:
         +schema: my_new_schema_name # leave blank for just the target_schema
 ```
 
-### Change the source table references
+#### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
 
 > [!IMPORTANT]
@@ -131,7 +131,7 @@ vars:
     salesforce_marketing_cloud_<default_source_table_name>_identifier: your_table_name 
 ```
 
-## (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for details</summary>
 <br>
 
@@ -139,8 +139,8 @@ Fivetran offers the ability for you to orchestrate your dbt project through [Fiv
 </details>
 
 
-# 🔍 Does this package have dependencies?
-This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
+## Does this package have dependencies?
+This dbt package is dependent on the following dbt packages. These dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
 > [!IMPORTANT]
 > If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
     
@@ -152,16 +152,15 @@ packages:
     - package: dbt-labs/dbt_utils
       version: [">=1.0.0", "<2.0.0"]
 ```
-# 🙌 How is this package maintained and can I contribute?
-## Package Maintenance
+## How is this package maintained and can I contribute?
+### Package Maintenance
 The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/salesforce_marketing_cloud/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
 
-## Contributions
-A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions! 
+### Contributions
+A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package!
+We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
 
-# 🏪 Are there any resources available?
-- If you have questions or want to reach out for help, please refer to the [GitHub Issue](https://github.com/fivetran/dbt_salesforce_marketing_cloud/issues/new/choose) section to find the right avenue of support for you.
+## Are there any resources available?
+- If you have questions or want to reach out for help, see the [GitHub Issue](https://github.com/fivetran/dbt_salesforce_marketing_cloud/issues/new/choose) section to find the right avenue of support for you.
 - If you would like to provide feedback to the dbt package team at Fivetran or would like to request a new dbt package, fill out our [Feedback Form](https://www.surveymonkey.com/r/DQ7K7WW).
-- Have questions or want to be part of the community discourse? Create a post in the [Fivetran community](https://community.fivetran.com/t5/user-group-for-dbt/gh-p/dbt-user-group) and our team along with the community can join in on the discussion!
