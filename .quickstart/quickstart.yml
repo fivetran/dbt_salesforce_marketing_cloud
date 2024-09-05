@@ -16,3 +16,11 @@ destination_configurations:
     dispatch:
       - macro_namespace: dbt_utils
         search_order: [ 'spark_utils', 'dbt_utils' ]
+public_models: [
+  "salesforce_marketing_cloud__subscriber_lists",
+  "salesforce_marketing_cloud__subscriber_overview",
+  "salesforce_marketing_cloud__sends_links",
+  "salesforce_marketing_cloud__events_enhanced",
+  "salesforce_marketing_cloud__email_overview",
+  "salesforce_marketing_cloud__sends_overview"
+]
