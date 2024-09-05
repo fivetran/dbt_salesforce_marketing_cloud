@@ -28,9 +28,9 @@ The main focus of the package is to transform the core object tables into analyt
 <!--section="salesforce_marketing_cloud_model"-->
 The following table provides a detailed list of all models materialized within this package by default.
 > [!TIP]
-> See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview).
+> See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview).
 
-| **model** | **description**|
+| **Table** | **Description**|
 | --------- | -------------- |
 | [salesforce_marketing_cloud__email_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__email_overview) | Each record provides the performance of an email via `total_*` and `*_rate` metrics. |
 | [salesforce_marketing_cloud__events_enhanced](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__events_enhanced) | Each record expands the source events information by pivoting the `event_type` options into boolean fields. Each record also has related send and email information added. |
