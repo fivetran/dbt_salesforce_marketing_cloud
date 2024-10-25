@@ -15,6 +15,7 @@
   - This update was applied as there are other Databricks runtimes (ie. sql warehouse, endpoint, and external runtime) which do not support the `insert_overwrite` incremental strategy used in the `salesforce_marketing_cloud__events_enhanced` model. 
 - In addition to the above, for Databricks users the `salesforce_marketing_cloud__events_enhanced` model will now leverage the incremental strategy only if the Databricks runtime is all-purpose. Otherwise, all other Databricks runtimes will not leverage an incremental strategy.
 - Added validation tests to the `integration_tests` folder to ensure the consistency and integrity of the `salesforce_marketing_cloud__events_enhanced` model for subsequent updates.
+- Changed the README model section tag
 
 # dbt_salesforce_marketing_cloud v0.1.0
 🎉 This is the initial release of this package! 🎉
