@@ -37,6 +37,8 @@ The following table provides a detailed list of all models materialized within t
 | [salesforce_marketing_cloud__sends_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_overview) | Each record provides the performance of a send via `total_*` and `*_rate` metrics. |
 | [salesforce_marketing_cloud__subscriber_lists](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_lists) | Each record provides a list, joined with all corresponding subscriber(s). |
 | [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Each record provides an overview of metrics and activity for a subscriber. |
+### Materialized Models
+Each Quickstart transformation job run materializes 24 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -44,7 +46,7 @@ The following table provides a detailed list of all models materialized within t
 ### Step 1: Prerequisites
 To use this dbt package, you must have the following:
 
-- At least one Fivetran Salesforce Marketing Cloud connector syncing data into your destination.
+- At least one Fivetran Salesforce Marketing Cloud connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **Databricks**, or **PostgreSQL** destination.
 
 #### Databricks dispatch configuration
@@ -76,7 +78,7 @@ packages:
 ```
 
 ### Step 3: Define database and schema variables
-#### Single connector
+#### Single connection
 By default, this package runs using your destination and the `salesforce_marketing_cloud` schema. If this is not where your Salesforce Marketing Cloud data is (for example, if your Salesforce Marketing Cloud schema is named `salesforce_marketing_cloud_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
@@ -84,8 +86,8 @@ vars:
     salesforce_marketing_cloud_database: your_database_name
     salesforce_marketing_cloud_schema: your_schema_name
 ```
-#### Union multiple connectors
-If you have multiple Salesforce Marketing Cloud connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `salesforce_marketing_cloud_union_schemas` OR `salesforce_marketing_cloud_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
+#### Union multiple connections
+If you have multiple Salesforce Marketing Cloud connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `salesforce_marketing_cloud_union_schemas` OR `salesforce_marketing_cloud_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
 ```yml
 vars:

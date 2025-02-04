@@ -1,3 +1,9 @@
+# dbt_salesforce_marketing_cloud version.version
+
+## Documentation
+- Added Quickstart model counts to README. ([#8](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/8))
+- Corrected references to connectors and connections in the README. ([#8](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/8))
+
 # dbt_salesforce_marketing_cloud v0.2.0
 
 [PR #4](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/4) includes the following updates. Please be aware these changes only impact Databricks warehouse users:
