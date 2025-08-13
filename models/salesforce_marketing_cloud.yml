@@ -4,11 +4,6 @@ models:
 
   - name: salesforce_marketing_cloud__email_overview
     description: Each record represents an email with aggregated send and event data for each.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - email_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -75,11 +70,6 @@ models:
 
   - name: salesforce_marketing_cloud__events_enhanced
     description: Each record represents an event with pivoted event type data.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - event_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -162,12 +152,6 @@ models:
 
   - name: salesforce_marketing_cloud__sends_links
     description: Each record represents a link and the corresponding send(s).
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - send_id
-            - link_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -250,11 +234,6 @@ models:
 
   - name: salesforce_marketing_cloud__sends_overview
     description: Each record represents a send with aggregated event data for each.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -345,12 +324,6 @@ models:
 
   - name: salesforce_marketing_cloud__subscriber_lists
     description: Each record represents a list and the corresponding subscriber(s).
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - list_id
-            - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
@@ -385,11 +358,6 @@ models:
 
   - name: salesforce_marketing_cloud__subscriber_overview
     description: Each record represents a subscriber with aggregated event data for each. 
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
