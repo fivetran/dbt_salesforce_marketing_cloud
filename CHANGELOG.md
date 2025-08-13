@@ -8,6 +8,10 @@
   - Removed all `accepted_values` tests.
   - Moved `loaded_at_field: _fivetran_synced` under the `config:` block in `src_salesforce_marketing_cloud.yml`.
 
+### Under the Hood
+- Updated conditions in `.github/workflows/auto-release.yml`.
+- Added `.github/workflows/generate-docs.yml`.
+
 # dbt_salesforce_marketing_cloud version.version
 
 ## Documentation
