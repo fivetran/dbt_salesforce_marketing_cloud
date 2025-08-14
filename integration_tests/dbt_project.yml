@@ -1,5 +1,5 @@
 name: 'salesforce_marketing_cloud_integration_tests'
-version: '0.2.0'
+version: '0.3.0'
 config-version: 2
 
 profile: 'integration_tests'
@@ -26,6 +26,8 @@ models:
   # +schema: "salesforce_marketing_cloud_{{ var('directed_schema','dev') }}" ## To be used for validation testing
 
 seeds:
+  +docs:
+    show: False
   salesforce_marketing_cloud_integration_tests:
     +quote_columns: "{{ true if target.type == 'redshift' else false }}"
     +column_types: 
@@ -40,3 +42,6 @@ seeds:
       +column_types: 
         created_date: "timestamp"
         unsubscribed_date: "timestamp"
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True

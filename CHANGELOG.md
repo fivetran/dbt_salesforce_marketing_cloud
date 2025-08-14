@@ -1,3 +1,16 @@
+# dbt_salesforce_marketing_cloud v0.3.0
+[PR #12](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/12) includes the following updates:
+
+### dbt Fusion Compatibility Updates
+- Updated package to maintain compatibility with dbt-core versions both before and after v1.10.6, which introduced a breaking change to multi-argument test syntax (e.g., `unique_combination_of_columns`).
+- Temporarily removed unsupported tests to avoid errors and ensure smoother upgrades across different dbt-core versions. These tests will be reintroduced once a safe migration path is available.
+  - Removed all `dbt_utils.unique_combination_of_columns` tests.
+  - Moved `loaded_at_field: _fivetran_synced` under the `config:` block in `src_salesforce_marketing_cloud.yml`.
+
+### Under the Hood
+- Updated conditions in `.github/workflows/auto-release.yml`.
+- Added `.github/workflows/generate-docs.yml`.
+
 # dbt_salesforce_marketing_cloud version.version
 
 ## Documentation
