@@ -1,4 +1,3 @@
-
 # Salesforce Marketing Cloud dbt Package ([Docs](https://fivetran.github.io/dbt_salesforce_marketing_cloud/))
 
 <p align="left">
@@ -78,7 +77,7 @@ Include the following Salesforce Marketing Cloud package version in your `packag
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
-    version: [">=0.2.0", "<0.3.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.3.0", "<0.4.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 ### Step 3: Define database and schema variables
