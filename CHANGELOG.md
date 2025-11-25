@@ -1,3 +1,10 @@
+# dbt_salesforce_marketing_cloud v0.4.0
+
+[PR #13](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/13) includes the following updates:
+
+## Features
+  - Increases the required dbt version upper limit to v3.0.0
+
 # dbt_salesforce_marketing_cloud v0.3.0
 [PR #12](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/12) includes the following updates:
 
