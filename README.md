@@ -1,4 +1,5 @@
-# Salesforce Marketing Cloud dbt Package ([Docs](https://fivetran.github.io/dbt_salesforce_marketing_cloud/))
+<!--section="salesforce-marketing-cloud_transformation_model"-->
+# Salesforce Marketing Cloud dbt Package
 
 <p align="left">
     <a alt="License"
@@ -11,54 +12,56 @@
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
     <a alt="Fivetran Quickstart Compatible"
-        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        href="https://fivetran.com/docs/transformations/data-models/quickstart-management#quickstartmanagement">
         <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
+This dbt package transforms data from Fivetran's Salesforce Marketing Cloud connector into analytics-ready tables.
+
+## Resources
+
+- Number of materialized models¹: 24
+- Connector documentation
+  - [Salesforce Marketing Cloud connector documentation](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud)
+  - [Salesforce Marketing Cloud ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud#schemainformation)
+- dbt package documentation
+  - [GitHub repository](https://github.com/fivetran/dbt_salesforce_marketing_cloud)
+  - [dbt Docs](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview)
+  - [DAG](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview?g_v=1)
+  - [Changelog](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/CHANGELOG.md)
+
 ## What does this dbt package do?
+This package enables you to transform core object tables into analytics-ready models and generate comprehensive data dictionaries. It creates enriched models with metrics focused on email, send, event, link, list, and subscriber data.
 
-This package models Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud). It uses data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud#schemainformation).
+### Output schema
+Final output tables are generated in the following target schema:
 
-The main focus of the package is to transform the core object tables into analytics-ready models:
-- Materializes [Salesforce Marketing Cloud staging tables](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview/salesforce_marketing_cloud/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud/#schemainformation). The staging tables clean, test, and prepare your Salesforce Marketing Cloud data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/salesforce-marketing-cloud) for analysis by doing the following:
-  - Primary keys are renamed from `id` to `<table name>_id`.
-  - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
-  - Provides insight into your Salesforce Marketing Cloud data across the following grains:
-    - Email, send, event, link, list, and subscriber
-- Generates a comprehensive data dictionary of your Salesforce Marketing Cloud data through the [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/).
+```
+<your_database>.<connector/schema_name>_sfmc
+```
 
-<!--section="salesforce_marketing_cloud_transformation_model"-->
-The following table provides a detailed list of all models materialized within this package by default.
-> [!TIP]
-> See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/overview).
+### Final output tables
 
-| **Table** | **Description**|
-| --------- | -------------- |
-| [salesforce_marketing_cloud__email_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__email_overview) | Each record provides the performance of an email via `total_*` and `*_rate` metrics. |
-| [salesforce_marketing_cloud__events_enhanced](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__events_enhanced) | Each record expands the source events information by pivoting the `event_type` options into boolean fields. Each record also has related send and email information added. |
-| [salesforce_marketing_cloud__sends_links](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_links) | Each record provides a link, joined with all corresponding send(s). |
-| [salesforce_marketing_cloud__sends_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_overview) | Each record provides the performance of a send via `total_*` and `*_rate` metrics. |
-| [salesforce_marketing_cloud__subscriber_lists](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_lists) | Each record provides a list, joined with all corresponding subscriber(s). |
-| [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Each record provides an overview of metrics and activity for a subscriber. |
-### Materialized Models
-Each Quickstart transformation job run materializes 24 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
-<!--section-end-->
+By default, this package materializes the following final tables:
 
-## How do I use the dbt package?
+| Table | Description |
+| :---- | :---- |
+| [salesforce_marketing_cloud__email_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__email_overview) | Summarizes email performance with aggregate metrics including total sends, opens, clicks, bounces, and engagement rates to evaluate email effectiveness at the email level. <br></br>**Example Analytics Questions:**<ul><li>Which emails have the highest open rates, click-through rates, and conversion rates?</li><li>How do bounce rates and delivery success vary across different email campaigns?</li><li>What is the average engagement rate by email type or subject line pattern?</li></ul>|
+| [salesforce_marketing_cloud__events_enhanced](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__events_enhanced) | Tracks individual email events with event types pivoted into boolean fields and enriched with send and email details to analyze granular user interactions and event patterns. <br></br>**Example Analytics Questions:**<ul><li>What event sequences (opened, clicked, converted) are most common among engaged subscribers?</li><li>How do different event types correlate with send timing or email content?</li><li>Which subscribers trigger the most high-value events across campaigns?</li></ul>|
+| [salesforce_marketing_cloud__sends_links](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_links) | Connects email links to their corresponding sends to analyze link click activity, measure call-to-action effectiveness, and understand which URLs drive the most engagement. <br></br>**Example Analytics Questions:**<ul><li>Which links and calls-to-action generate the highest click rates across sends?</li><li>How do link placements (header, body, footer) affect click-through performance?</li><li>What landing page URLs receive the most clicks from email campaigns?</li></ul>|
+| [salesforce_marketing_cloud__sends_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__sends_overview) | Provides send-level performance metrics including total opens, clicks, bounces, and engagement rates to measure the effectiveness of individual email sends and identify optimization opportunities. <br></br>**Example Analytics Questions:**<ul><li>Which sends have the highest engagement rates and delivery success?</li><li>How do send performance metrics vary by send time, day of week, or audience segment?</li><li>What is the relationship between send volume and engagement rate?</li></ul>|
+| [salesforce_marketing_cloud__subscriber_lists](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_lists) | Connects subscriber lists to individual subscribers to manage list memberships, analyze list growth, and understand subscriber distribution across segmentation lists. <br></br>**Example Analytics Questions:**<ul><li>Which lists have the most subscribers and highest engagement rates?</li><li>How is subscriber membership distributed across different lists?</li><li>What is the overlap between lists and do multi-list subscribers show higher engagement?</li></ul>|
+| [salesforce_marketing_cloud__subscriber_overview](https://fivetran.github.io/dbt_salesforce_marketing_cloud/#!/model/model.salesforce_marketing_cloud.salesforce_marketing_cloud__subscriber_overview) | Consolidates subscriber-level engagement metrics including total sends received, open rates, click rates, and bounce history to understand individual subscriber behavior and preferences. <br></br>**Example Analytics Questions:**<ul><li>Which subscribers are most engaged based on total opens, clicks, and emails received?</li><li>What percentage of subscribers have never opened an email or have hard bounced?</li><li>How do subscriber engagement levels vary by subscription source or list membership?</li></ul>|
 
-### Step 1: Prerequisites
+¹ Each Quickstart transformation job run materializes these models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+
+---
+
+## Prerequisites
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Salesforce Marketing Cloud connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **Databricks**, or **PostgreSQL** destination.
-
-#### Databricks dispatch configuration
-If you are using a Databricks destination with this package, you must add the following (or a variation of the following) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
-```yml
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['spark_utils', 'dbt_utils']
-```
 
 #### Database Incremental Strategies
 The `salesforce_marketing_cloud__events_enhanced` model in this package is materialized incrementally and is configured to work with the different strategies available to each supported warehouse.
@@ -70,17 +73,33 @@ For **Snowflake**, **Redshift**, and **Postgres** databases, we have chosen `del
 
 > Regardless of strategy, we recommend that users periodically run a `--full-refresh` to ensure a high level of data quality.
 
-### Step 2: Install the package
+## How do I use the dbt package?
+You can either add this dbt package in the Fivetran dashboard or import it into your dbt project:
+
+- To add the package in the Fivetran dashboard, follow our [Quickstart guide](https://fivetran.com/docs/transformations/data-models/quickstart-management).
+- To add the package to your dbt project, follow the setup instructions in the dbt package's [README file](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/README.md#how-do-i-use-the-dbt-package) to use this package.
+
+<!--section-end-->
+
+### Install the package
 Include the following Salesforce Marketing Cloud package version in your `packages.yml` file:
 > [!TIP]
 > Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
-    version: [">=0.4.0", "<0.5.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.5.0", "<0.6.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
-### Step 3: Define database and schema variables
+#### Databricks dispatch configuration
+If you are using a Databricks destination with this package, you must add the following (or a variation of the following) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
+```yml
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
+```
+
+### Define database and schema variables
 #### Single connection
 By default, this package runs using your destination and the `salesforce_marketing_cloud` schema. If this is not where your Salesforce Marketing Cloud data is (for example, if your Salesforce Marketing Cloud schema is named `salesforce_marketing_cloud_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
@@ -102,7 +121,7 @@ vars:
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
-### Step 4: Enable/Disable Variables
+### Enable/Disable Variables
 By default, this package brings in data from the Salesforce Marketing Cloud `link` and `list` source tables. However, if you have disabled syncing these sources, you will need to add the following configuration to your `dbt_project.yml`:
 
 ```yml
@@ -111,7 +130,7 @@ vars:
     salesforce_marketing_cloud__list_enabled: false # default = true
 ```
 
-### (Optional) Step 5: Additional configurations
+### (Optional) Additional configurations
 
 #### Changing the Build Schema
 By default this package will build the Salesforce Marketing Cloud staging models within a schema titled (<target_schema> + `_stg_sfmc`) and the Salesforce Marketing Cloud final models within a schema titled (<target_schema> + `_sfmc`) in your target database. If this is not where you would like your modeled Salesforce Marketing Cloud data to be written, add the following configuration to your `dbt_project.yml` file:
@@ -135,11 +154,11 @@ vars:
     salesforce_marketing_cloud_<default_source_table_name>_identifier: your_table_name 
 ```
 
-### (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for details</summary>
 <br>
 
-Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
+Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt/setup-guide#transformationsfordbtcoresetupguide).
 </details>
 
 ## Does this package have dependencies?
@@ -155,14 +174,18 @@ packages:
     - package: dbt-labs/dbt_utils
       version: [">=1.0.0", "<2.0.0"]
 ```
+<!--section="salesforce-marketing-cloud_maintenance"-->
 ## How is this package maintained and can I contribute?
+
 ### Package Maintenance
-The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/salesforce_marketing_cloud/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+The Fivetran team maintaining this package only maintains the [latest version](https://hub.getdbt.com/fivetran/salesforce_marketing_cloud/latest/) of the package. We highly recommend you stay consistent with the latest version of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
 
 ### Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
+We highly encourage and welcome contributions to this package. Learn how to contribute to a package in dbt's [Contributing to an external dbt package article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657).
+
+<!--section-end-->
 
 ## Are there any resources available?
 - If you have questions or want to reach out for help, see the [GitHub Issue](https://github.com/fivetran/dbt_salesforce_marketing_cloud/issues/new/choose) section to find the right avenue of support for you.

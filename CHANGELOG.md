@@ -1,3 +1,14 @@
+# dbt_salesforce_marketing_cloud v0.5.0
+
+[PR #14](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/14) includes the following updates:
+
+## Documentation
+- Updates README with standardized Fivetran formatting.
+
+## Under the Hood
+- In the `quickstart.yml` file:
+  - Adds `table_variables` for relevant sources to prevent missing sources from blocking downstream Quickstart models.
+
 # dbt_salesforce_marketing_cloud v0.4.0
 
 [PR #13](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/13) includes the following updates:
