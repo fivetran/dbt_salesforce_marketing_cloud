@@ -37,7 +37,7 @@ This package enables you to transform core object tables into analytics-ready mo
 Final output tables are generated in the following target schema:
 
 ```
-<your_database>.<connector/schema_name>_salesforce_marketing_cloud
+<your_database>.<connector/schema_name>_sfmc
 ```
 
 ### Final output tables
