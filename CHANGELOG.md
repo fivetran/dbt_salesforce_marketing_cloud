@@ -1,3 +1,10 @@
+# dbt_salesforce_marketing_cloud v0.5.1
+
+[PR #16](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/16) includes the following updates:
+
+## Under the Hood
+- Nests the `enabled` attribute under `config:` for relevant source tables to align with recent dbt updates.
+
 # dbt_salesforce_marketing_cloud v0.5.0
 
 [PR #14](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/14) includes the following updates:
