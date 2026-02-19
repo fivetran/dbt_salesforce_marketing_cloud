@@ -260,7 +260,7 @@ sources:
             description: '{{ doc("unsubscribed_date") }}'
 
       - name: triggered_send
-        identifier: '{{ var("salesforce_marketing_cloud_triggered_send_identifier", "send") }}'
+        identifier: '{{ var("salesforce_marketing_cloud_triggered_send_identifier", "triggered_send") }}'
         description: '{{ doc("triggered_send") }}'
         columns:
         - name: id

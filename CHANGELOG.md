@@ -2,8 +2,12 @@
 
 [PR #16](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/16) includes the following updates:
 
+## Bug Fix
+- Corrects identifier for the `triggered_send` source table. Previously, this was pointing to the `send` table.
+
 ## Under the Hood
 - Nests the `enabled` attribute under `config:` for relevant source tables to align with recent dbt updates.
+- Adds consistency data validation tests for all end models.
 
 # dbt_salesforce_marketing_cloud v0.5.0
 
