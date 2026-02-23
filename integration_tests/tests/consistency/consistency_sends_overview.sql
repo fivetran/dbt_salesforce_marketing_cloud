@@ -1,6 +1,6 @@
 {{ config(
     tags="fivetran_validations",
-    enabled=var('fivetran_validation_tests_enabled', false) and var('salesforce_marketing_cloud__link_enabled', true)
+    enabled=var('fivetran_validation_tests_enabled', false)
 ) }}
 
 with prod as (
