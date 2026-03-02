@@ -21,7 +21,10 @@ vars:
     salesforce_marketing_cloud_link_send_identifier: "link_send_data"
     salesforce_marketing_cloud_triggered_send_identifier: "triggered_send_data"
 
-models: 
+models:
+  +persist_docs:
+    relation: true
+    columns: "{{ false if target.type in ('databricks') else true }}" 
   +schema: "{{ 'sfmc_sqlw_tests' if target.name == 'databricks-sql' else 'salesforce_marketing_cloud' }}"
   # +schema: "salesforce_marketing_cloud_{{ var('directed_schema','dev') }}" ## To be used for validation testing
 
