@@ -4,6 +4,8 @@ sources:
   - name: salesforce_marketing_cloud
     database: '{% if target.type not in ("spark") %}{{ var("salesforce_marketing_cloud_database", target.database) }}{% endif %}'
     schema: '{{ var("salesforce_marketing_cloud_schema", "salesforce_marketing_cloud") }}'
+    config:
+      enabled: "{{ var('salesforce_marketing_cloud_sources', []) == [] }}"
     tables:
       - name: email
         identifier: '{{ var("salesforce_marketing_cloud_email_identifier", "email") }}'
@@ -85,7 +87,7 @@ sources:
         identifier: '{{ var("salesforce_marketing_cloud_link_identifier", "link") }}'
         description: '{{ doc("link") }}'
         config:
-          enabled: "{{ var('salesforce_marketing_cloud__link_enabled', true) }}"
+          enabled: "{{ var('salesforce_marketing_cloud__link_enabled', true) and var('salesforce_marketing_cloud_sources', []) == [] }}"
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
@@ -112,7 +114,7 @@ sources:
         identifier: '{{ var("salesforce_marketing_cloud_link_send_identifier", "link_send") }}'
         description: '{{ doc("link_send") }}'
         config:
-          enabled: "{{ var('salesforce_marketing_cloud__link_enabled', true) }}"
+          enabled: "{{ var('salesforce_marketing_cloud__link_enabled', true) and var('salesforce_marketing_cloud_sources', []) == [] }}"
         columns:
           - name: _fivetran_synced
             description: '{{ doc("_fivetran_synced") }}'
@@ -127,7 +129,7 @@ sources:
         identifier: '{{ var("salesforce_marketing_cloud_list_identifier", "list") }}'
         description: '{{ doc("list") }}'
         config:
-          enabled: "{{ var('salesforce_marketing_cloud__list_enabled', true) }}"
+          enabled: "{{ var('salesforce_marketing_cloud__list_enabled', true) and var('salesforce_marketing_cloud_sources', []) == [] }}"
         columns:
           - name: id
             description: '{{ doc("list_id") }}'
@@ -148,7 +150,7 @@ sources:
         identifier: '{{ var("salesforce_marketing_cloud_list_subscriber_identifier", "list_subscriber") }}'
         description: '{{ doc("list_subscriber") }}'
         config:
-          enabled: "{{ var('salesforce_marketing_cloud__list_enabled', true) }}"
+          enabled: "{{ var('salesforce_marketing_cloud__list_enabled', true) and var('salesforce_marketing_cloud_sources', []) == [] }}"
         columns:
           - name: id
             description: '{{ doc("list_subscriber_id") }}'

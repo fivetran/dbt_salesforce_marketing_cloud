@@ -14,10 +14,7 @@ fields as (
                 staging_columns=get_event_columns()
             )
         }}
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='salesforce_marketing_cloud_union_schemas', 
-            union_database_variable='salesforce_marketing_cloud_union_databases') 
-        }}
+        {{ fivetran_utils.apply_source_relation(package_name='salesforce_marketing_cloud') }}
     from base
 ),
 
