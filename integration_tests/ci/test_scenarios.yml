@@ -22,3 +22,9 @@ test_scenarios:
       salesforce_marketing_cloud__link_enabled: false
       salesforce_marketing_cloud__list_enabled: false
     include_incremental: true
+
+  - name: "MDLS"
+    vars:
+      fivetran_using_source_casing: true
+    include_incremental: false
+    include_dbt_seed: true

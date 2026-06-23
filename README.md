@@ -75,7 +75,7 @@ Include the following Salesforce Marketing Cloud package version in your `packag
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
-    version: [">=0.5.0", "<0.6.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.6.0", "<0.7.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 #### Databricks dispatch configuration
@@ -87,26 +87,40 @@ dispatch:
 ```
 
 ### Define database and schema variables
-#### Single connection
+#### Option A: Single connection
 By default, this package runs using your destination and the `salesforce_marketing_cloud` schema. If this is not where your Salesforce Marketing Cloud data is (for example, if your Salesforce Marketing Cloud schema is named `salesforce_marketing_cloud_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
-    salesforce_marketing_cloud_database: your_database_name
+    salesforce_marketing_cloud_database: your_destination_name
     salesforce_marketing_cloud_schema: your_schema_name
 ```
-#### Union multiple connections
-If you have multiple Salesforce Marketing Cloud connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `salesforce_marketing_cloud_union_schemas` OR `salesforce_marketing_cloud_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
+
+#### Option B: Union multiple connections
+If you have multiple Salesforce Marketing Cloud connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. For each source table, the package will union all of the data together and pass the unioned table into the transformations. The `source_relation` column in each model indicates the origin of each record.
+
+To use this functionality, you will need to set the `salesforce_marketing_cloud_sources` variable in your root `dbt_project.yml` file:
 
 ```yml
+# dbt_project.yml
+
 vars:
-    salesforce_marketing_cloud_union_schemas: ['sfmc_usa','sfmc_canada'] # use this if the data is in different schemas/datasets of the same database/project
-    salesforce_marketing_cloud_union_databases: ['sfmc_usa','sfmc_canada'] # use this if the data is in different databases/projects but uses the same schema name
+  salesforce_marketing_cloud:
+    salesforce_marketing_cloud_sources:
+      - database: connection_1_destination_name # Required
+        schema: connection_1_schema_name # Required
+        name: connection_1_source_name # Required only if following the step in the following subsection
+
+      - database: connection_2_destination_name
+        schema: connection_2_schema_name
+        name: connection_2_source_name
 ```
 
-> NOTE: The native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
+> Previous versions of this package employed two separate, mutually exclusive variables for unioning: `salesforce_marketing_cloud_union_schemas` and `salesforce_marketing_cloud_union_databases`. While these variables are still supported, `salesforce_marketing_cloud_sources` is the recommended variable to configure.
 
-To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
+#### Optional: Incorporate unioned sources into DAG
+
+If you use [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore) and are unioning multiple Salesforce Marketing Cloud connections, you can define your sources in a property `.yml` file, [using this as a template](https://github.com/fivetran/dbt_salesforce_marketing_cloud/blob/main/models/staging/src_salesforce_marketing_cloud.yml). Set the variable `has_defined_sources: true` under the Salesforce Marketing Cloud namespace in your `dbt_project.yml`. Otherwise, your Salesforce Marketing Cloud connections won't appear in your DAG. See the `union_connections` macro [documentation](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#optional-union-connections-defined-sources-configuration) for full configuration details.
 
 ### Enable/Disable Variables
 By default, this package brings in data from the Salesforce Marketing Cloud `link` and `list` source tables. However, if you have disabled syncing these sources, you will need to add the following configuration to your `dbt_project.yml`:
@@ -139,6 +153,14 @@ If an individual source table has a different name than the package expects, add
 ```yml
 vars:
     salesforce_marketing_cloud_<default_source_table_name>_identifier: your_table_name 
+```
+
+#### Source casing for case-sensitive destinations
+By default, the package applies case-insensitive comparisons when resolving `source_relation` values. If your destination is case-sensitive and you want downstream transformations to respect the exact casing of your source database and schema names, set the following variable:
+
+```yml
+vars:
+    fivetran_using_source_casing: true
 ```
 
 ### (Optional) Orchestrate your models with Fivetran Transformations for dbt Core™
