@@ -1,3 +1,11 @@
+# dbt_salesforce_marketing_cloud v0.6.1
+
+[PR #21](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/21) includes the following updates:
+
+## Feature Updates
+- Adds DuckDB as a supported destination.
+
+
 # dbt_salesforce_marketing_cloud v0.6.0
 
 [PR #19](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/19) includes the following updates:
