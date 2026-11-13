@@ -75,7 +75,7 @@ Include the following Salesforce Marketing Cloud package version in your `packag
 ```yml
 packages:
   - package: fivetran/salesforce_marketing_cloud
-    version: [">=0.8.0", "<0.9.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.7.0", "<0.8.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 #### Databricks dispatch configuration
