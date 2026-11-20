@@ -3,12 +3,18 @@ version: 2
 models:
   - name: stg_salesforce_marketing_cloud__email
     description: '{{ doc("email") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - email_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: character_set
         description: '{{ doc("character_set") }}'
@@ -31,12 +37,18 @@ models:
 
   - name: stg_salesforce_marketing_cloud__event
     description: '{{ doc("event") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - event_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: event_type
         description: '{{ doc("event_type") }}'
@@ -73,12 +85,18 @@ models:
 
   - name: stg_salesforce_marketing_cloud__link
     description: '{{ doc("link") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - link_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: link_alias
         description: '{{ doc("alias") }}'
@@ -97,26 +115,39 @@ models:
 
   - name: stg_salesforce_marketing_cloud__link_send
     description: '{{ doc("link_send") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - link_id
+              - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: link_id
         description: '{{ doc("link_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
 
   - name: stg_salesforce_marketing_cloud__list
     description: '{{ doc("list") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: list_id
         description: '{{ doc("list_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: created_date
         description: '{{ doc("created_date") }}'
@@ -131,12 +162,18 @@ models:
 
   - name: stg_salesforce_marketing_cloud__send
     description: '{{ doc("send") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
@@ -201,12 +238,18 @@ models:
 
   - name: stg_salesforce_marketing_cloud__subscriber
     description: '{{ doc("subscriber") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: created_date
         description: '{{ doc("created_date") }}'
@@ -223,16 +266,23 @@ models:
 
   - name: stg_salesforce_marketing_cloud__list_subscriber
     description: '{{ doc("list_subscriber") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_subscriber_id
+              - list_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: list_subscriber_id
         description: '{{ doc("list_subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: list_id
         description: '{{ doc("list_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: created_date
         description: '{{ doc("created_date") }}'
@@ -245,12 +295,18 @@ models:
 
   - name: stg_salesforce_marketing_cloud__triggered_send
     description: '{{ doc("triggered_send") }}'
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - triggered_send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: triggered_send_id
         description: '{{ doc("triggered_send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: auto_add_subscribers
         description: '{{ doc("auto_add_subscribers") }}'
