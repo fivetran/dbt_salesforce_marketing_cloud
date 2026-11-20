@@ -3,7 +3,7 @@
 [PR #23](https://github.com/fivetran/dbt_salesforce_marketing_cloud/pull/23) includes the following updates:
 
 ## Feature Update
-- Raises the minimum dbt version to 1.10.0.
+- **Breaking change**: Raises the minimum dbt version to 1.10.0.
 - Adds `dbt_utils.unique_combination_of_columns` tests to staging and end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_salesforce_marketing_cloud/issues/new/choose).
 
 # dbt_salesforce_marketing_cloud v0.6.1
