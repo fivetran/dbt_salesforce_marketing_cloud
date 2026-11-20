@@ -15,7 +15,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: asset_id
         description: '{{ doc("asset_id") }}'
@@ -87,7 +87,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: event_type
         description: '{{ doc("event_type") }}'
@@ -176,7 +176,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: link_id
         description: '{{ doc("link_id") }}'
@@ -264,7 +264,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
@@ -361,7 +361,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: list_id
         description: '{{ doc("list_id") }}'
@@ -401,7 +401,7 @@ models:
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
