@@ -4,12 +4,18 @@ models:
 
   - name: salesforce_marketing_cloud__email_overview
     description: Each record represents an email with aggregated send and event data for each.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - email_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: email_id
         description: '{{ doc("email_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: asset_id
         description: '{{ doc("asset_id") }}'
@@ -70,12 +76,19 @@ models:
 
   - name: salesforce_marketing_cloud__events_enhanced
     description: Each record represents an event with pivoted event type data.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - event_id
+              - event_type
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: event_id
         description: '{{ doc("event_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: event_type
         description: '{{ doc("event_type") }}'
@@ -152,12 +165,19 @@ models:
 
   - name: salesforce_marketing_cloud__sends_links
     description: Each record represents a link and the corresponding send(s).
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - send_id
+              - link_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: link_id
         description: '{{ doc("link_id") }}'
@@ -234,12 +254,18 @@ models:
 
   - name: salesforce_marketing_cloud__sends_overview
     description: Each record represents a send with aggregated event data for each.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - send_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: send_id
         description: '{{ doc("send_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: bcc_email
         description: '{{ doc("bcc_email") }}'
@@ -324,12 +350,19 @@ models:
 
   - name: salesforce_marketing_cloud__subscriber_lists
     description: Each record represents a list and the corresponding subscriber(s).
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_id
+              - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: list_id
         description: '{{ doc("list_id") }}'
@@ -358,12 +391,18 @@ models:
 
   - name: salesforce_marketing_cloud__subscriber_overview
     description: Each record represents a subscriber with aggregated event data for each. 
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - subscriber_id
     columns:
       - name: source_relation
         description: '{{ doc("source_relation") }}'
       - name: subscriber_id
         description: '{{ doc("subscriber_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: subscriber_key
         description: '{{ doc("subscriber_key") }}'
