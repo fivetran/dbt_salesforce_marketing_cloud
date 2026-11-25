@@ -1,0 +1,19 @@
+version: 0.8.0
+is_breaking: true
+
+schema_data_changes:
+  entries:
+    - models:
+        - salesforce_marketing_cloud__events_enhanced
+      change_type: "Changed field/model"
+      old: "Incremental `unique_key` is `event_id`"
+      new: "Incremental `unique_key` is `source_relation`, `event_id`, and `event_type`"
+      is_breaking: false
+      notes: "On Snowflake, Redshift, Postgres, and SQL Server, incremental runs no longer delete events that share an `event_id` with a newer event of another type or from another connection. BigQuery and Databricks are not affected."
+    - models:
+        - salesforce_marketing_cloud__events_enhanced
+      change_type: "Changed field/model"
+      old: Incremental runs load events after the latest `event_date` in the table
+      new: "Incremental runs reload events from each connection's own latest `event_date`, inclusive"
+      is_breaking: false
+      notes: "Events that arrive late for the latest `event_date`, or for a connection that syncs behind the others, now load on the next run instead of being skipped. Applies to Snowflake, Redshift, Postgres, and SQL Server."
