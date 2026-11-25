@@ -1,24 +1,38 @@
 {{ config(
     materialized='incremental' if is_incremental_compatible(target) else 'table',
-    unique_key='event_id',
+    unique_key=['source_relation', 'event_id', 'event_type'],
     incremental_strategy='insert_overwrite' if target.type in ('bigquery','spark','databricks') else 'delete+insert',
     partition_by={'field': 'event_date', 'data_type': 'date'} if target.type not in ('spark', 'databricks', 'duckdb') else ['event_date'],
     cluster_by = ['event_date'],
     file_format='delta'
 ) }}
 
--- events grain with sends and email information added.
-with events as( 
-  select
-    *
-  from {{ ref('stg_salesforce_marketing_cloud__event') }}
+{% set use_source_lookback = is_incremental() and target.type != 'bigquery' %}
 
-  {% if is_incremental() %}
-    {% if target.type == 'bigquery' %}
-      where date(event_date) >= date(_dbt_max_partition)
-    {% else %}
-      where event_date > (select max(event_date) from {{ this }})
-    {% endif %}
+-- events grain with sends and email information added.
+with {% if use_source_lookback %}max_event_dates as (
+  -- Latest loaded event_date for each connection.
+  select
+    source_relation,
+    max(event_date) as max_event_date
+  from {{ this }}
+  group by source_relation
+
+), {% endif %}events as(
+  select
+    stg_events.*
+  from {{ ref('stg_salesforce_marketing_cloud__event') }} as stg_events
+
+  {% if use_source_lookback %}
+  -- Reprocess each connection from its own latest event_date. Using >= picks up late-arriving events on that date,
+  -- and the delete+insert unique_key replaces the overlapping rows without creating duplicates.
+  left join max_event_dates
+    on stg_events.source_relation = max_event_dates.source_relation
+  where max_event_dates.max_event_date is null
+    or stg_events.event_date >= max_event_dates.max_event_date
+
+  {% elif is_incremental() %}
+  where date(stg_events.event_date) >= date(_dbt_max_partition)
   {% endif %}
 
 ), events_enhanced as (
