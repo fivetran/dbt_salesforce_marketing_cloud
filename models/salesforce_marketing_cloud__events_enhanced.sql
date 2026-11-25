@@ -7,29 +7,32 @@
     file_format='delta'
 ) }}
 
+{% set use_source_lookback = is_incremental() and target.type != 'bigquery' %}
+
 -- events grain with sends and email information added.
-with events as(
+with {% if use_source_lookback %}max_event_dates as (
+  -- Latest loaded event_date for each connection.
+  select
+    source_relation,
+    max(event_date) as max_event_date
+  from {{ this }}
+  group by source_relation
+
+), {% endif %}events as(
   select
     stg_events.*
   from {{ ref('stg_salesforce_marketing_cloud__event') }} as stg_events
 
-  {% if is_incremental() %}
-    {% if target.type == 'bigquery' %}
-      where date(stg_events.event_date) >= date(_dbt_max_partition)
-    {% else %}
-      -- Reprocess each connection from its own latest event_date. Using >= picks up late-arriving events on that date,
-      -- and the delete+insert unique_key replaces the overlapping rows without creating duplicates.
-      left join (
-        select
-          source_relation,
-          max(event_date) as max_event_date
-        from {{ this }}
-        group by source_relation
-      ) as max_event_dates
-        on stg_events.source_relation = max_event_dates.source_relation
-      where max_event_dates.max_event_date is null
-        or stg_events.event_date >= max_event_dates.max_event_date
-    {% endif %}
+  {% if use_source_lookback %}
+  -- Reprocess each connection from its own latest event_date. Using >= picks up late-arriving events on that date,
+  -- and the delete+insert unique_key replaces the overlapping rows without creating duplicates.
+  left join max_event_dates
+    on stg_events.source_relation = max_event_dates.source_relation
+  where max_event_dates.max_event_date is null
+    or stg_events.event_date >= max_event_dates.max_event_date
+
+  {% elif is_incremental() %}
+  where date(stg_events.event_date) >= date(_dbt_max_partition)
   {% endif %}
 
 ), events_enhanced as (
